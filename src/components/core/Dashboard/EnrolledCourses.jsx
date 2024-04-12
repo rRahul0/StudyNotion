@@ -11,6 +11,7 @@ export default function () {
   const getEnrolledCourses = async () => {
     try {
       const response = await getUserEnrolledCourses(token);
+      console.log(response, "EnrolledCourses 16")
       setEnrolledCourses(response);
     } catch (error) {
       console.log("Unable to fetch Enrolled Courses");
@@ -19,7 +20,7 @@ export default function () {
 
   useEffect(() => {
     getEnrolledCourses();
-    console.log(enrolledCourses)
+    // console.log(enrolledCourses)
   }, []);
 
   const navigate = useNavigate();
