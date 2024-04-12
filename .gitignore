@@ -7,17 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules/
-dist/
+# dependencies
+node_modules
+dist
 dist-ssr
 *.local
-
+   
 # Environment variables
-.env*
+.env 
 
+# production
+build
 
 # Test coverage reports
-coverage/
+coverage
 
 # Vite specific files
 vite.config.js
@@ -34,6 +37,3 @@ vite.config.ts
 *.njsproj
 *.sln
 *.sw?
-
-
-
