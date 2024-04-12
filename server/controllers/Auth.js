@@ -217,7 +217,7 @@ exports.login = async (req, res) => {
         // maxAge: 60*1000,
         httpOnly: true,
         secure: true,
-        domain: "127.0.0.1",
+        // domain: "127.0.0.1",
         sameSite: "none",
       };
       // console.log("hello world1")
