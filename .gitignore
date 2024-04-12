@@ -14,8 +14,8 @@ dist-ssr
 *.local
    
 # Environment variables
-.env 
-
+.env*
+.env
 # production
 build
 
