@@ -20,9 +20,8 @@ export default function ResponsiveNav({ loading, subLinks }) {
     <div className="md:hidden relative ">
       <div
         className="text-richblack-25 text-3xl cursor-pointer transition-all ease-in-out duration-500 "
-        onClick={() => setOpen(!open)} 
+        onClick={(e) => {setOpen(!open);e.stopPropagation()}} 
         ref={ref}
-        // onClick={(e) => e.stopPropagation()}
       >
         {open ? <RxCross2 /> : <FaBars />}
       </div>
