@@ -27,6 +27,7 @@ export default function CourseDetails() {
   const { paymentLoading } = useSelector((state) => state.course);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { cart } = useSelector((state) => state.cart)
 
   // Getting courseId from url parameter
   const { courseId } = useParams();
@@ -39,7 +40,7 @@ export default function CourseDetails() {
     // Calling fetchCourseDetails fucntion to fetch the details
     (async () => {
       try {
-        const res = await fetchCourseDetails(courseId);
+        const res = await fetchCourseDetails(courseId);  
         // console.log("course details res: ", res)
         setResponse(res);
       } catch (error) {
@@ -175,7 +176,7 @@ export default function CourseDetails() {
               </div>
               <p className={`text-richblack-200`}>{courseDescription}</p>
               <div className="text-md flex flex-wrap items-center gap-2">
-                <span className="text-yellow-25">{avgReviewCount}</span>
+                <span className="text-yellow-25">{avgReviewCount.toString()}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span>{`(${ratingAndreviews.length} reviews)`}</span>
                 <span>{`${studentEnrolled.length} students enrolled`}</span>
@@ -200,10 +201,18 @@ export default function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
-              <button className="yellowButton" onClick={handleBuyCourse}>
-                Buy Now
+              <button className="yellowButton" 
+              onClick={studentEnrolled.includes(user?._id)?
+              () => navigate("/dashboard/enrolled-courses"):handleBuyCourse} >
+                {studentEnrolled.includes(user?._id)? "Go To Course":"Buy Now"}
               </button>
-              <button onClick={()=>handleAddToCart()} className="blackButton">Add to Cart</button>
+              <button className="blackButton"
+              onClick={
+                (cart.findIndex((item) => item._id === courseId)==-1)?
+                ()=>handleAddToCart():()=>navigate("/dashboard/cart")}>
+                {(cart.findIndex((item) => item._id === courseId)==-1)?"Add to Cart":"Go to Cart"}
+                {/* {console.log(cart.findIndex(courseId))} */}
+                </button>
             </div>
           </div>
           {/* Courses Card */}
