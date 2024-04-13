@@ -30,7 +30,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
         className={`${
           open ? "flex flex-col gap-5" : "hidden"
         } w-[180px] text-richblack-50 absolute z-30 top-[3rem] right-0 border border-richblack-600 bg-richblack-800 p-3 rounded-md items-center transition-all ease-in-out duration-500`}
-        
+        ref2={ref}
       >
         <div>
           {token === null && (
