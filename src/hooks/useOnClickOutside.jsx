@@ -9,9 +9,9 @@ export default function useOnClickOutside( ref, handler) {
       // console.log(ref)
       
       if (!ref.current || ref.current.contains(event.target)) {
-        // console.log(event.target)
         return;
-      }      
+      }
+         
         handler();
 
 
@@ -28,8 +28,7 @@ export default function useOnClickOutside( ref, handler) {
     // Cleanup function to remove the event listeners when the component unmounts or when the ref/handler dependencies change
 
     return () => {
-      // console.log(2, Date.now())
-      // console.log("hello world")
+      
       document.removeEventListener("mousedown", listener);
       document.removeEventListener("touchstart", listener);
     };
