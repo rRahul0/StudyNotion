@@ -20,18 +20,23 @@ export default function ResponsiveNav({ loading, subLinks }) {
     <div className="md:hidden relative ">
       <div
         className="text-richblack-25 text-3xl cursor-pointer transition-all ease-in-out duration-500 "
-        onClick={(e) => {setOpen(!open);e.stopPropagation()}} 
-        ref={ref}
+        onClick={() => setOpen(!open)}
       >
-        {open ? <RxCross2 /> : <FaBars />}
+        {!open && <FaBars /> }
       </div>
 { open && 
       <div
         className={`${
-          open ? "flex flex-col gap-5" : "hidden"
-        } w-[180px] text-richblack-50 absolute z-30 top-[3rem] right-0 border border-richblack-600 bg-richblack-800 p-3 rounded-md items-center transition-all ease-in-out duration-500`}
-        ref2={ref}
+          open ? "flex flex-col gap-2" : "hidden"
+        } w-[180px] text-richblack-50 absolute z-10 top-[3rem] right-0 border border-richblack-600 bg-richblack-800 p-3 rounded-md items-center transition-all ease-in-out duration-500`}
+        onClick={(e) => e.stopPropagation()}
+        ref={ref}
       >
+        <div className="w-full flex justify-end text-3xl" onClick={() => setOpen(!open)}>
+        <RxCross2 />
+        </div>
+        <div className="flex flex-col gap-5 items-center">
+        
         <div>
           {token === null && (
             <div className="flex  gap-2 items-center">
@@ -66,6 +71,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
             ItemClick={() => setOpen(false)}
             
           />
+        </div>
         </div>
       </div>
 }
