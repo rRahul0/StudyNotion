@@ -20,7 +20,9 @@ export default function ResponsiveNav({ loading, subLinks }) {
     <div className="md:hidden relative ">
       <div
         className="text-richblack-25 text-3xl cursor-pointer transition-all ease-in-out duration-500 "
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(!open)} 
+        ref={ref}
+        // onClick={(e) => e.stopPropagation()}
       >
         {open ? <RxCross2 /> : <FaBars />}
       </div>
@@ -29,19 +31,20 @@ export default function ResponsiveNav({ loading, subLinks }) {
         className={`${
           open ? "flex flex-col gap-5" : "hidden"
         } w-[180px] text-richblack-50 absolute z-10 top-[3rem] right-0 border border-richblack-600 bg-richblack-800 p-3 rounded-md items-center transition-all ease-in-out duration-500`}
-        onClick={(e) => e.stopPropagation()}
-        ref={ref}
+        
       >
         <div>
           {token === null && (
             <div className="flex  gap-2 items-center">
               <Link to="/login">
-                <button className="border border-richblack-700 bg-richblack-700 px-3 py-2 text-richblack-100 rounded-lg" onClick={() => setOpen(false)}>
+                <button className="border border-richblack-700 bg-richblack-700 px-3 py-2 text-richblack-100 rounded-lg" 
+                onClick={() => setOpen(false)}>
                   Log in
                 </button>
               </Link>
               <Link to="/signup">
-                <button className="border border-richblack-700 bg-richblack-700 px-3 py-2 text-richblack-100 rounded-lg" onClick={() => setOpen(false)}>
+                <button className="border border-richblack-700 bg-richblack-700 px-3 py-2 text-richblack-100 rounded-lg" 
+                onClick={() => setOpen(false)}>
                   Sign up
                 </button>
               </Link>
