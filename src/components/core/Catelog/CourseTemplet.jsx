@@ -12,7 +12,7 @@ export default function CourseTemplet({ course, Height }) {
   }, [course]);
   
   return (
-    <div>
+    <div className="w-full flex justify-center ">
       <Link to={`/courses/${course._id}`}>
         <div>
           <div className="rounded-lg">

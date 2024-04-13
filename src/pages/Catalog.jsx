@@ -128,7 +128,7 @@ export default function Catalog() {
                   <CourseTemplet
                     course={course}
                     key={index}
-                    Height={"h-[200px] w-[270px] "}
+                    Height={"h-[200px] w-[250px] "}
                   />
                 ))}
             </div>

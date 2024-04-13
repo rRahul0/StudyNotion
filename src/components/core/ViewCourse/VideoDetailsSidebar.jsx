@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import IconButton from "../../common/IconButton";
 import { BsChevronDown } from "react-icons/bs"
+import {setOpen} from "../../../slices/profileSlice";
 
 
 export default function VideoDetailsSidebar({ setReviewModal }) {
   const [activeStatus, setActiveStatus] = useState("");
   const [videoBarActive, setVideoBarActive] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { open } = useSelector((state) => state.profile);
   const { sectionId, subSectionId } = useParams();
   const {
     courseSectionData,
@@ -45,7 +48,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
 
   return (
     <>
-      <div  className="flex h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800">
+      <div  className="flex h-[calc(100vh-3.5rem)] w-[290px] sm:w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 overflow-y-hidden absolute md:relative">
         {/* for buttons and heading */}
         <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25">
           <div className="flex w-full items-center justify-between ">
@@ -112,6 +115,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                       } `}
                       key={i}
                       onClick={() => {
+                        dispatch(setOpen(!open))
                         navigate(
                           `/view-course/${courseEntireData?._id}/section/${course?._id}/subSection/${topic?._id}`
                         )

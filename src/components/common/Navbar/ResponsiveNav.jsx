@@ -24,6 +24,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
       {open? <RxCross2 onClick={()=>setOpen(false)} />:<FaBars onClick={()=>setOpen(true)}  />}
 
       </div>
+
       {open && (
         <div
           className={`${
@@ -80,6 +81,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
           </div>
         </div>
       )}
+
     </div>
   );
 }
