@@ -14,7 +14,7 @@ export default function ProfileDropdown({ItemClick}) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
-  useOnClickOutside(ref, () => setOpen(false))
+  useOnClickOutside(ref, () => {setOpen(false)})
 
   if (!user) return null
 
@@ -25,7 +25,7 @@ export default function ProfileDropdown({ItemClick}) {
         <img
           src={user?.image}
           alt={`profile-${user?.firstName}`}
-          className="aspect-square w-[30px] rounded-full object-cover"
+          className="aspect-square w-[50px] md:w-[30px] rounded-full object-cover"
         />
         <AiOutlineCaretDown className="text-sm text-richblack-100" />
       </div>
