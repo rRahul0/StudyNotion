@@ -29,7 +29,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.6rem)] bg-richblack-800 py-10 absolute md:relative" >
+    <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.6rem)] bg-richblack-800 py-10 absolute z-10 md:relative" >
 
       <div className="flex flex-col">
         {sidebarLinks.map((link) => {
