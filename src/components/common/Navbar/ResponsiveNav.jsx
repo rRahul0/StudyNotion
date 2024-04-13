@@ -7,6 +7,7 @@ import NavItem from "./NavItem";
 import ProfilrDropDown from "../../core/Auth/ProfileDropDown";
 
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import useOnClickSpecial from "../../../hooks/useOnClickSpecial";
 
 export default function ResponsiveNav({ loading, subLinks }) {
   const { token } = useSelector((state) => state.auth);
@@ -15,15 +16,17 @@ export default function ResponsiveNav({ loading, subLinks }) {
   const [open, setOpen] = useState(false);
 
   const ref = useRef(null);
-  useOnClickOutside(ref, () => setOpen(open));
+  // const ref2 = useRef(null);
+  useOnClickOutside(ref, () => setOpen(false));
+  // useOnClickSpecial(ref2, ()=>setOpen(false))
 
   return (
     <div className="md:hidden relative ">
       <div
-        className="text-richblack-25 text-3xl cursor-pointer transition-all ease-in-out duration-200 "
-        onClick={() => setOpen(!open)}
+        className="text-richblack-25 text-3xl cursor-pointer transition-all ease-in-out duration-200  "
+        disable={"sfgdf"}
       >
-        {!open ? <FaBars /> : <RxCross2 />}
+        {open? <RxCross2 />:<FaBars   onClick={() => setOpen(true)}/>}
       </div>
       {open && (
         <div
@@ -33,9 +36,9 @@ export default function ResponsiveNav({ loading, subLinks }) {
           onClick={(e) => e.stopPropagation()}
           ref={ref}
         >
-          {/* <div className="w-full flex justify-end text-3xl" onClick={() => setOpen(!open)}>
-        <RxCross2 />
-        </div> */}
+        {/* //   <div className="w-full flex justify-end text-3xl" onClick={() => setOpen(!open)}>
+        // <RxCross2 />
+        // </div> */}
           <div className="flex flex-col gap-5 items-center">
             <div>
               {token === null && (
