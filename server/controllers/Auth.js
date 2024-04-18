@@ -89,6 +89,7 @@ exports.signUp = async (req, res) => {
         message: "All required field are not filled",
       });
     }
+    console.log(req.body.otp, "92")
 
     //check 2 password are match or not
     if (password !== confirmPassword) {
@@ -100,6 +101,7 @@ exports.signUp = async (req, res) => {
 
     //check user already exist
     const existingUser = await User.findOne({ email });
+    console.log(req.body.otp, "104")
 
     //if user exist
     if (existingUser) {
@@ -113,7 +115,7 @@ exports.signUp = async (req, res) => {
     const recentOTP = await OTP.find({ email })
       .sort({ createdAt: -1 })
       .limit(-1);
-    //console.log(recentOTP);
+    console.log(recentOTP, otp, "118");
     //validate otp
     if (otp !== recentOTP[0].otp) {
       return res.status(400).json({
