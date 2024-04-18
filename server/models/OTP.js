@@ -10,11 +10,11 @@ const otpSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createdAt: {  
-        type: Date,
-        default: Date.now(),
-        expireAfterSeconds: 600,
-    }
+    createdAt: {
+		type: Date,
+		default: Date.now,
+		expires: 600, // The document will be automatically deleted after 5 minutes of its creation time
+	},
 })
 
 async function sendVerificationEmail(email, otp) {
@@ -34,12 +34,6 @@ otpSchema.pre("save", async function (next) {
     // Only send an email when a new document is created
     if (this.isNew) {
         await sendVerificationEmail(this.email, this.otp);
-        // try {
-        // const mailresponse = await mailSender(this.email, "Verification Email Form StudyNotion", this.otp)
-        // } catch (error) {
-        // console.log("error occured at sending email", error)
-        // throw error
-        // }
     }
     next();
 })
