@@ -8,7 +8,57 @@ const { mailSender } = require("../utilis/mailSender");
 require("dotenv").config();
 
 // send otp
+exports.sendOTP = async (req, res) => {
+  try {
+    // fetch email
+    const { email } = req.body;
 
+    // check user already present or not
+    const checkuserpresent = await User.findOne({ email });
+
+    // if yes
+    if (checkuserpresent) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exist",
+      });
+    }
+
+    // if no generate otp
+    let otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+    });
+    // console.log("otp generated is: " + otp)
+
+    // uniqueness
+    let result = await OTP.findOne({ otp });
+    while (result) {
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false,
+      });
+
+      result = await OTP.findOne({ otp });
+    }
+    // console.log("Auth.js 47")
+
+    //create DB entry
+    const otpBody = await OTP.create({ email: email, otp: otp });
+    console.log(otpBody, "otp, 50")
+
+    //send response
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent sucessfully",
+      otp: otpBody.otp,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 //signup
 exports.signUp = async (req, res) => {
