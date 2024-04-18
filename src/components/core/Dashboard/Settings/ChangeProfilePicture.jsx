@@ -58,16 +58,16 @@ export default function ChangeProfilePicture() {
   }, [imageFile])
 
   return (
-    <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
-      <div className="flex items-center gap-x-4">
+    <div className="flex items-center justify-center md:justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+      <div className="flex flex-col md:flex-row items-center gap-4 ">
         <img 
         src={previewSource || user?.image}
         alt={`profile-${user?.firstName}`} 
         className="aspect-square w-[78px] rounded-full object-cover" />
 
-        <div className="space-y-2">
+        <div className="space-y-2 flex flex-col md:justify-center items-center md:items-start">
           <p>Change profile picture</p>
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row justify-center gap-3">
             <input
               type='file'
               ref={fileInputRef}
@@ -94,6 +94,7 @@ export default function ChangeProfilePicture() {
             </IconButton>
           </div>
         </div>
+
       </div>
     </div>
   )

@@ -34,7 +34,9 @@ export default function Sidebar() {
         <div className=" text-richblack-100 flex justify-center items-center md:hidden  w-10 h-10 rounded-full bg-richblack-600">
           <FaLessThan />
         </div>
+
       </div>
+      
       <div className="flex flex-col">
         {sidebarLinks.map((link) => {
           if (link.type && link.type !== user?.accountType) return null;
