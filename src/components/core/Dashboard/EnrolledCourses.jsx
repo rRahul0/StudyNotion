@@ -11,7 +11,7 @@ export default function () {
   const getEnrolledCourses = async () => {
     try {
       const response = await getUserEnrolledCourses(token);
-      console.log(response, "EnrolledCourses 16")
+      // console.log(response, "EnrolledCourses 16")
       setEnrolledCourses(response);
     } catch (error) {
       console.log("Unable to fetch Enrolled Courses");
@@ -34,7 +34,7 @@ export default function () {
           <Loader />
         </div>
       ) : !enrolledCourses.length ? (
-        <p className="grid h-[10vh] w-full place-content-center text-richblack-5">
+        <p className="grid h-[10vh] w-full place-content-center py-10 text-center text-2xl font-medium text-richblack-100">
           You haven,t enrolled in any course yet
         </p>
       ) : (
@@ -54,10 +54,11 @@ export default function () {
               ${ index === arr.length - 1 ? "rounded-b-lg" : "rounded-none" }`}
               key={index}
             >
+              
               <div
-                className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
+                className="flex flex-col items-center sm:justify-center sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
                 onClick={() => {
-                  console.log(course, "course EnrolledCourses 58");
+                  // console.log(course, "course EnrolledCourses 58");
                   navigate(
                     `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/subSection/${course.courseContent?.[0]?.subSections?.[0]?._id}`
                   );
@@ -71,8 +72,8 @@ export default function () {
                 <div className="flex max-w-xs flex-col gap-2">
                   <p className="font-semibold">{course.courseName}</p>
                   <p className="text-xs text-richblack-300">
-                    {course.courseDescription.length > 50
-                      ? `${course.courseDescription.slice(0, 50)}...`
+                    {course.courseDescription.length > 15
+                      ? `${course.courseDescription.slice(0, 15)}...`
                       : course.courseDescription}
                   </p>
                 </div>
@@ -87,8 +88,11 @@ export default function () {
                   isLabelVisible={false}
                 />
               </div>
+              
             </div>
+            
           ))}
+          
         </div>
       )}
     </>

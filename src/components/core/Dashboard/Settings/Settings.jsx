@@ -7,7 +7,7 @@ import UpdatePassword from "./UpdatePassword"
 
 export default function Settings() {
   return (
-    <div className=' w-full lg:w-[800px] px-20'>
+    <>
       <h1 className=" mb-14 text-3xl font-medium text-richblack-5">Edit Profile</h1>
       {/* Change Profile Picture */}
       <ChangeProfilePicture />
@@ -23,6 +23,6 @@ export default function Settings() {
 
       {/* Delete Account */}
       <DeleteAccount />
-    </div>
+    </>
   )
 }

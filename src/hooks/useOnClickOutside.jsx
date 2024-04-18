@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 // This hook detects clicks outside of the specified component and calls the provided handler function.
-export default function useOnClickOutside( ref, handler) {
+export default function useOnClickOutside(ref, handler) {
   useEffect(() => {
     // Define the listener function to be called on click/touch events
     const listener = (event) => {
@@ -11,7 +11,9 @@ export default function useOnClickOutside( ref, handler) {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
-         
+      // if (!ref2.current || ref2.current.contains(event.target)) {
+      //   return;
+      // }
         handler();
 
 
