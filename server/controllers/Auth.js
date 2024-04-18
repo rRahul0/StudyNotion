@@ -47,7 +47,7 @@ exports.sendOTP = async (req, res) => {
 
     //create DB entry
     const otpBody = await OTP.create({ email: email, otp: otp });
-    console.log(otpBody, "otp, 50")
+    // console.log(otpBody, "otp, 50")
 
     //send response
     return res.status(200).json({
@@ -63,7 +63,7 @@ exports.sendOTP = async (req, res) => {
 //signup
 exports.signUp = async (req, res) => {
   try {
-    console.log(req.body.otp)
+    // console.log(req.body.otp)
     // data fetch from req.body
     const {
       firstName,
@@ -89,7 +89,7 @@ exports.signUp = async (req, res) => {
         message: "All required field are not filled",
       });
     }
-    console.log(req.body.otp, "92")
+    // console.log(req.body.otp, "92")
 
     //check 2 password are match or not
     if (password !== confirmPassword) {
@@ -101,7 +101,7 @@ exports.signUp = async (req, res) => {
 
     //check user already exist
     const existingUser = await User.findOne({ email });
-    console.log(req.body.otp, "104")
+    // console.log(req.body.otp, "104")
 
     //if user exist
     if (existingUser) {
@@ -115,7 +115,7 @@ exports.signUp = async (req, res) => {
     const recentOTP = await OTP.find({ email })
       .sort({ createdAt: -1 })
       .limit(-1);
-    console.log(recentOTP, otp, "118");
+    // console.log(recentOTP, otp, "118");
     //validate otp
     if (otp !== recentOTP[0].otp) {
       return res.status(400).json({
