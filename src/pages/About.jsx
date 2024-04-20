@@ -29,7 +29,7 @@ export default function About() {
           </p>
         </header>
         <div className="sm:h-[70px] lg:h-[150px] "></div>
-        <div className="absolute bottom-20 sm:bottom-[10%] min-[1537px]:bottom-[35%]  left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[40%] grid-cols-3 gap-3 lg:gap-5 px-2 justify-items-center">
+        <div className="absolute -bottom-16 md:-bottom-10 lg:bottom-10 sm:bottom-[10%] min-[1537px]:bottom-[35%]  left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[40%] grid-cols-3 gap-3 lg:gap-5 px-2 justify-items-center">
           <img src={image1} />
           <img src={image2} />
           <img src={image3} />
