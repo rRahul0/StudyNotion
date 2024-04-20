@@ -1,6 +1,7 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course");
+const RatingandReview = require("../models/RatingandReview");
 const { uploadImageToCloudinary } = require("../utilis/imageUploader");
 const { deleteFromCloudinary } = require("../utilis/deleteFile");
 const { convertSecondsToDuration } = require("../utilis/secToDuration");
@@ -49,9 +50,15 @@ exports.deleteAccount = async (req, res) => {
   try {
     //get id
     const id = req.user.id;
-
     //user exist?
-    const userDetails = await User.findById({ _id: id });
+    const userDetails = await User.findById(id)
+    .select("courses accountType additionalDetails")
+    .populate({
+      path: "courses",
+      populate: {
+        path: "studentEnrolled",
+      },
+    });
 
     //validation
     if (!userDetails) {
@@ -60,23 +67,38 @@ exports.deleteAccount = async (req, res) => {
         message: "user not found",
       });
     }
+    if (userDetails.accountType === "instructor" && userDetails.courses.length > 0) {
+      userDetails.courses.forEach(course => {
+        if (course.studentEnrolled.length > 0) {
+          return res.status(400).json({
+            success: false,
+            message: "Student enrolled in course can't delete account",
+          });
+        }
+      })
+    }
+
 
     //delete profile
     await Profile.findByIdAndDelete({
       _id: String(userDetails.additionalDetails),
     });
     await CourseProgress.deleteMany({ userId: id });
+    await RatingandReview.deleteMany({ user: id });
+
 
     //TODO: unenroll user from all courses
     if (userDetails.courses) {
+      // console.log(userDetails.courses)
       for (let c of userDetails.courses) {
         await Course.findByIdAndUpdate(
-          { _id: c },
+          { _id: c._id },
           { $pull: { studentEnrolled: id } },
           { new: true }
         );
       }
     }
+
 
     // await Course.findByIdAndUpdate({})
     //delete user
@@ -86,6 +108,7 @@ exports.deleteAccount = async (req, res) => {
     if (!profileImage.includes("api.dicebear.com", 0)) {
       deleteFromCloudinary(profileImage, process.env.FOLDER_NAME, "image");
     }
+
 
     //return response
     return res.status(200).json({

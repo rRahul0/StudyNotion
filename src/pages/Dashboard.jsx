@@ -33,13 +33,13 @@ export default function Dashboard() {
       </div>
 
       {/* modal hidden */}
-      <div className="h-[calc(100vh-3.6rem)]  w-full ">
-        <div className=" h-full mx-auto overflow-y-auto pt-5 px-[10%]">
+      <div className="h-[calc(100vh-3.6rem)]  w-full  ">
+        <div className="h-full mx-auto overflow-y-auto pt-5 px-[10%] ">
           <div
-            className="w-full border-2 relative -left-[10%]"
+            className="md:hidden relative -left-[10%] ">
+            <div className=" text-richblack-100 flex justify-center items-center  w-10 h-10 rounded-full bg-richblack-600 "
             onClick={() => dispatch(setOpen(!open))}
-          >
-            <div className=" text-richblack-100 flex justify-center items-center md:hidden  w-10 h-10 rounded-full bg-richblack-600">
+            >
             <FaGreaterThan />
             </div>
           </div>

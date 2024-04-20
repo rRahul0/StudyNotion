@@ -30,15 +30,35 @@ const ReviewSlider = ({ courseId }) => {
 
   return (
     <div className="text-white ">
-      <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent  ">
+      <div className="my-[50px] h-[184px] sm:w-11/12 lg:max-w-maxContent  ">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={6}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            400:{
+              slidesPerView:2,
+            },
+            639: {
+              slidesPerView: 3,
+            },
+            865:{
+              slidesPerView:4
+            },
+            1537:{
+              slidesPerView:5
+            },
+            1750:{
+              slidesPerView:6
+            },
+          }}
           spaceBetween={24}
           loop={true}
           freeMode={true}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           modules={[Autoplay, Navigation, Pagination]}
-          className="w-full"
+          className="w-full flex justify-center border-richblack-100"
         >
           {reviews.map((review, i) => (
             <SwiperSlide key={i} className="rounded-lg">

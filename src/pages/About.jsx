@@ -15,7 +15,7 @@ export default function About() {
   return (
     <div className="text-richblack-300 ">
       {/* section-1 */}
-      <section className=" h-[618px] w-full bg-richblack-800 py-32 text-center flex flex-col gap-10 items-center ">
+      <section className=" h-[618px] w-[100vw] bg-richblack-800 py-32 text-center flex flex-col gap-10 items-center ">
         <header className="lg:w-7/12  max-w-maxContent mx-auto flex flex-col gap-8 px-10">
           <h1 className="text-4xl text-richblack-25">
             Driving Innovation in Online Education for a
@@ -29,7 +29,7 @@ export default function About() {
           </p>
         </header>
         <div className="sm:h-[70px] lg:h-[150px] "></div>
-        <div className="absolute -bottom-5 sm:bottom-[10%] left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[40%] grid-cols-3 gap-3 lg:gap-5 px-2 justify-items-center">
+        <div className="absolute bottom-20 sm:bottom-[10%] min-[1537px]:bottom-[35%]  left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[40%] grid-cols-3 gap-3 lg:gap-5 px-2 justify-items-center">
           <img src={image1} />
           <img src={image2} />
           <img src={image3} />
@@ -37,8 +37,8 @@ export default function About() {
       </section>
 
       {/* section-2 */}
-      <section className="my-36 sm:mt-48 sm:m-36 w-100vw flex sm:justify-center sm:max-w-maxContent ">
-        <div>
+      <section className="my-36 w-full sm:mt-48 sm:m-36 flex min-[1537px]:justify-center min-[1537px]:w-[85%]">
+        <div className="flex max-w-maxContent">
           <Quote />
         </div>
       </section>
