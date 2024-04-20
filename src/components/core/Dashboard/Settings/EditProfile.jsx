@@ -28,7 +28,7 @@ export default function EditProfile() {
   }
 
   return (
-    <div>
+    <div className='md:w-[700px]'>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 md:p-8 md:px-12">
           <h2 className="text-lg font-semibold text-richblack-5">

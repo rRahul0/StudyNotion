@@ -183,6 +183,9 @@ export default function CourseDetails() {
               </div>
               <div>
                 <p className="">
+                  {
+                    instructor?"hi":"helo"
+                  }
                   Created By {`${instructor.firstName} ${instructor.lastName}`}
                 </p>
               </div>

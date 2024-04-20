@@ -7,6 +7,8 @@ import { apiConnector } from '../apiConnector'
 const { COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API } = studentEndpoints
 import rzpLogo from '../../assets/Logo/rzp_logo.png'
 import { setPaymentLoading } from '../../slices/courseSlice'
+import { removeFromCart } from "../../slices/cartSlice";
+import { useDispatch } from 'react-redux'
 
 
 function loadScript(src) {
@@ -26,7 +28,7 @@ function loadScript(src) {
 }
 
 export const buyCourse = async (token, courses, userDetails, navigate, dispatch) => {
-    console.log("buy course", courses, token, userDetails)
+    // console.log("buy course", courses, token, userDetails)
     const toastId = toast.loading("Loading...")
     try {
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
@@ -38,7 +40,7 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
             COURSE_PAYMENT_API, { courses },
             { Authorization: `Bearer ${token}` }
         )
-        console.log("hello")
+        // console.log("hello")
         if (!orderResponse.data.success) {
             throw new Error(orderResponse.data.message)
         }
@@ -108,6 +110,9 @@ async function verifyPayment(bodyData, token, navigate, dispatch){
             throw new Error(response.data.message)
         }
         toast.success("Payment Successfull, You are added to the course")
+        for (let course of bodyData.courses) {
+            dispatch(removeFromCart(course));
+          }
         navigate("/dashboard/enrolled-courses")
     } catch (error) {
         console.log("payment verify error...", error)

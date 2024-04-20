@@ -51,10 +51,10 @@ export default function ViewCourse() {
         <div className="relative z-20 flex" ref={ref}>
           <div className="hidden md:block"><VideoDetailsSidebar setReviewModal={setReviewModal} /></div>
           <div className="md:hidden">{open && (<VideoDetailsSidebar setReviewModal={setReviewModal} />)}</div>
-          <div className={`text-white relative top-[50%] ${open? "left-[290px]":"left-0"} z-10 w-[18px] h-20 rounded-r-3xl border-r-2 flex justify-end items-center pr-1 md:hidden bg-richblack-800`}
+          <div className={`text-white relative top-[50%] ${open? "left-[290px] sm:left-[320px]":"left-0"} z-10 w-[18px] h-20 rounded-r-3xl border-r-2 flex justify-end items-center pr-1 md:hidden bg-richblack-800`}
           onClick={()=>dispatch(setOpen(!open))}
           >
-            {open ? <FaLessThan /> : <FaGreaterThan />}
+            {open ? <FaLessThan />:<FaGreaterThan />}
             {/* <FaGreaterThan /><FaLessThan /> */}
           </div>
         </div>

@@ -50,13 +50,13 @@ export default function () {
 
           {enrolledCourses.map((course, index, arr) => (
             <div
-              className={`flex items-center border border-richblack-700 
+              className={`flex items-center  border border-richblack-700 
               ${ index === arr.length - 1 ? "rounded-b-lg" : "rounded-none" }`}
               key={index}
             >
               
               <div
-                className="flex flex-col items-center sm:justify-center sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
+                className="flex flex-col items-center sm:justify-start sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
                 onClick={() => {
                   // console.log(course, "course EnrolledCourses 58");
                   navigate(

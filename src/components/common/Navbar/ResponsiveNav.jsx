@@ -4,12 +4,16 @@ import { FaBars } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
+import { ACCOUNT_TYPE } from "../../../utils/constants";
 import ProfilrDropDown from "../../core/Auth/ProfileDropDown";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
 export default function ResponsiveNav({ loading, subLinks }) {
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
+  const { totalItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -18,7 +22,20 @@ export default function ResponsiveNav({ loading, subLinks }) {
 
 
   return (
-    <div className="md:hidden relative ">
+    <div className="md:hidden relative flex gap-5 items-center">
+      <div className="md:hidden flex items-center gap-x-4 ">
+          {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+            <Link to="/dashboard/cart" className="relative">
+              <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
+              {totalItems > 0 && (
+                <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
+          )}
+
+        </div>
       <div className="text-richblack-25 text-3xl cursor-pointer   "
         onClick={() => setOpen(!open)}
       >
