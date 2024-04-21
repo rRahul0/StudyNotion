@@ -59,7 +59,7 @@ export default function ViewCourse() {
           </div>
         </div>
         <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
-          <div className="mx-6">
+          <div className="ml-2 mr-6 md:ml-6">
             <Outlet />
           </div>
         </div>

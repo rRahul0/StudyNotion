@@ -156,7 +156,7 @@ export default function VideoDetails() {
   };
 
   return (
-    <div className="flex flex-col gap-5 text-white">
+    <div className="flex flex-col gap-5 text-white max-md:mt-5 ">
       {!videoData ? (
         <img
           src={previewSource}
@@ -170,6 +170,7 @@ export default function VideoDetails() {
           playsInline
           onEnded={() => setVideoEnded(true)}
           src={videoData?.videoURL}
+          className="border border-richblack-700 rounded-lg shadow-lg shadow-richblack-500"
         > 
             <BigPlayButton position="center" />
           {videoEnded && (
