@@ -29,7 +29,7 @@ const ReviewSlider = ({ courseId }) => {
   }, []);
 
   return (
-    <div className="text-white ">
+    <div className="text-richblack-50 ">
       <div className="my-[50px] h-[184px] sm:w-11/12 lg:max-w-maxContent  ">
         <Swiper
           slidesPerView={6}
@@ -56,13 +56,13 @@ const ReviewSlider = ({ courseId }) => {
           spaceBetween={24}
           loop={true}
           freeMode={true}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          autoplay={{ delay: 1000, disableOnInteraction: false }}
           modules={[Autoplay, Navigation, Pagination]}
           className="w-full flex justify-center border-richblack-100"
         >
           {reviews.map((review, i) => (
             <SwiperSlide key={i} className="rounded-lg">
-              <div className="flex flex-col items-center gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+              <div className="flex flex-col items-center gap-3 p-3 text-[14px] text-richblack-25">
                 <div className="flex items-center gap-4">
                   <div className="w-14">
                     <img

@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { setUser } from "../../slices/profileSlice"
 import { logout } from './authAPI';
+import { localStorageDelete } from "../localStorageDelete"
+
 
 const {
   UPDATE_DISPLAY_PICTURE_API,
@@ -17,6 +19,8 @@ export function updateDisplayPicture(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading ...")
     try {
+      if (localStorageDelete()) { toast.dismiss(toastId); return }
+
       const response = await apiConnector(
         "PUT",
         UPDATE_DISPLAY_PICTURE_API,
@@ -50,6 +54,8 @@ export function updateProfile(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {
+      if (localStorageDelete()) { toast.dismiss(toastId); return }
+
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
         Authorization: `Bearer ${token}`,
       })
@@ -58,15 +64,11 @@ export function updateProfile(token, formData) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-
-      // const userImage = response.data.userProfile.image
-      //   ? response.data.userProfile.image
-      //   : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.userProfile.firstName} ${response.data.userProfile.lastName}`
-      
       const newUser = JSON.parse(localStorage.getItem("user"))
-      newUser.additionalDetails=response.data.profileDetails
+      console.log(response.data.profileDetails)
+      newUser.value.additionalDetails = response.data.profileDetails
       dispatch(setUser(newUser))
-      localStorage.setItem("user", JSON.stringify(newUser))
+      localStorage.setItem("user", JSON.stringify({ value: newUser, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
       toast.success("Profile Updated Successfully")
     } catch (error) {
       console.log("UPDATE_PROFILE_API API ERROR............", error)
@@ -80,6 +82,7 @@ export function updateProfile(token, formData) {
 export async function changePassword(token, formData) {
   const toastId = toast.loading("Loading...")
   try {
+      if (localStorageDelete()) { toast.dismiss(toastId); return }
     const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
       Authorization: `Bearer ${token}`,
     })
@@ -101,6 +104,8 @@ export function deleteProfile(token, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {
+      if (localStorageDelete()) { toast.dismiss(toastId); return }
+
       const response = await apiConnector("DELETE", DELETE_PROFILE_API, null, {
         Authorization: `Bearer ${token}`,
       })

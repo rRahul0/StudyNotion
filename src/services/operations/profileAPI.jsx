@@ -2,6 +2,8 @@ import { toast } from "react-hot-toast"
 
 import { apiConnector } from "../apiConnector"
 import { profileEndpoints } from "../apis"
+import { localStorageDelete } from "../localStorageDelete"
+
 
 const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints;
 
@@ -11,6 +13,9 @@ export function getUserDetails(token, navigate) {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
+            if (localStorageDelete()) { toast.dismiss(toastId); return }
+
+
             const response = await apiConnector("GET", GET_USER_DETAILS_API, null, {
                 Authorization: `Bearer ${token}`,
             })
@@ -36,6 +41,8 @@ export function getUserDetails(token, navigate) {
 export async function getUserEnrolledCourses(token) {
     let result = []
     try {
+        if (localStorageDelete()) { toast.dismiss(toastId); return }
+
         const response = await apiConnector(
             "GET",
             GET_USER_ENROLLED_COURSES_API,
@@ -60,6 +67,8 @@ export async function getInstructorData(token) {
     const toastId = toast.loading("Loading...")
     let result = []
     try {
+        if (localStorageDelete()) { toast.dismiss(toastId); return }
+
         const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
             Authorization: `Bearer ${token}`,
         })
