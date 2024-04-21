@@ -64,15 +64,16 @@ const ReviewSlider = ({ courseId }) => {
             <SwiperSlide key={i} className="rounded-lg">
               <div className="flex flex-col items-center gap-3 p-3 text-[14px] text-richblack-25">
                 <div className="flex items-center gap-4">
-                  <div className="w-14">
+                  <div className="w-14 ">
                     <img
                       src={
                         review?.user?.image
                           ? review?.user?.image
                           : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                       }
+                   
                       alt=""
-                      className="h-9 w-9 rounded-full object-cover"
+                      className=" rounded-full object-cover"
                     />
                   </div>
                   <div className="flex flex-col">
