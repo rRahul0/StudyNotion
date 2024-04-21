@@ -76,7 +76,7 @@ export default function Catalog() {
       </div>
       <div>
         {/* section-1 */}
-        <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+        <div className=" mx-auto box-content w-full max-w-maxContentTab md:px-4 py-12 lg:max-w-maxContent">
           <div className="section_heading">Courses to get you started</div>
           <div className="my-4 flex border-b border-b-richblack-600 text-sm">
             <p
@@ -108,7 +108,7 @@ export default function Catalog() {
         </div>
 
         {/* section-2 */}
-        <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+        <div className=" mx-auto box-content w-full max-w-maxContentTab md:px-4 py-12 lg:max-w-maxContent">
           <p className="section_heading">Top Courses in {categoryPageData?.data?.selectedCategory?.name}</p>
           <div className="py-8">
             <CourseSlider
@@ -118,10 +118,10 @@ export default function Catalog() {
         </div>
 
         {/* section-3 */}
-        <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+        <div className=" mx-auto box-content w-full max-w-maxContentTab md:px-4 py-12 lg:max-w-maxContent">
           <p className="section_heading">Frequently Bought</p>
           <div className="py-8">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 ">
+            <div className="grid grid-cols-1 justify-start gap-6 lg:grid-cols-2 ">
               {categoryPageData?.data?.mostSellingCourses
                 ?.slice(0, 4)
                 .map((course, index) => (

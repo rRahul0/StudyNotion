@@ -49,8 +49,8 @@ const ratingChanged = (newRating) => {
           </button>
         </div>
 
-        <div className="p-6">
-          <div className="flex flex-col items-center justify-center gap-y-4">
+        <div className="p-2">
+          <div className="flex flex-col items-center justify-center gap-y-3">
             <img
               src={user?.image}
               alt={user?.firstName + "profile"}
@@ -65,7 +65,7 @@ const ratingChanged = (newRating) => {
 
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="mt-6 flex flex-col items-center gap-3"
+              className="flex flex-col items-center gap-3"
             >
               <ReactStars
                 count={5}
