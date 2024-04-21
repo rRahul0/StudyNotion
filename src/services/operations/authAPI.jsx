@@ -109,7 +109,7 @@ export function login(email, password, navigate) {
 
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
-     
+     console.log(response.data.user)
       dispatch(setUser(response.data.user))
       localStorage.setItem("token", JSON.stringify({value:response.data.token, expiry: Date.now() + 1000*60*60*24*7}))
       localStorage.setItem("user", JSON.stringify({value:response.data.user, expiry: Date.now() + 1000*60*60*24*7}))
