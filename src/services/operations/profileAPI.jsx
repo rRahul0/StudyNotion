@@ -12,9 +12,9 @@ export function getUserDetails(token, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
-        try {
-            if (localStorageDelete()) { toast.dismiss(toastId); return }
+        if (localStorageDelete()) { toast.dismiss(toastId); return }
 
+        try {
 
             const response = await apiConnector("GET", GET_USER_DETAILS_API, null, {
                 Authorization: `Bearer ${token}`,
@@ -66,8 +66,9 @@ export async function getUserEnrolledCourses(token) {
 export async function getInstructorData(token) {
     const toastId = toast.loading("Loading...")
     let result = []
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     try {
-        if (localStorageDelete()) { toast.dismiss(toastId); return }
 
         const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
             Authorization: `Bearer ${token}`,
