@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-hot-toast';
-export const localStorageDelete = () => {
-    const userToken = JSON.parse(localStorage.getItem("user"))
-    console.log(userToken.expiry-Date.now())
-    if (userToken?.expiry < Date.now()) {
-        console.log("bdfsh")
-        if(localStorage.getItem("user"))localStorage.removeItem("user")
-        // if(localStorage.getItem("token"))localStorage.removeItem("token")
-        toast.error("Session Expired. Please Login Again")
-        return true
-    }return false
-}
+// export const localStorageDelete = () => {
+//     const userToken = JSON.parse(localStorage.getItem("user"))
+//     console.log(userToken.expiry-Date.now())
+//     if (userToken?.expiry < Date.now()) {
+//         console.log("bdfsh")
+//         if(localStorage.getItem("user"))localStorage.removeItem("user")
+//         // if(localStorage.getItem("token"))localStorage.removeItem("token")
+//         toast.error("Session Expired. Please Login Again")
+//         return true
+//     }return false
+// }
 const initialState = {
     loading: false,
-    user: localStorageDelete()? null:JSON.parse(localStorage.getItem("user"))?.value,
+    user: localStorage.getItem("user")? JSON.parse(localStorage.getItem("user")).value:null,
     open: false,
 }
 const profileSlice = createSlice({

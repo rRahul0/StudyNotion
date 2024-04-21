@@ -83,7 +83,7 @@ function Navbar() {
             </div>
           )}
           {
-            // token?console.log("yes"):console.log("no")
+            // {token?console.log("yes"):console.log("no")}
             token && <ProfilrDropDown />
           }
         </div>
