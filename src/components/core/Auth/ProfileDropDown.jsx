@@ -9,6 +9,7 @@ import { logout } from "../../../services/operations/authAPI"
 
 export default function ProfileDropdown({ItemClick}) {
   const { user } = useSelector((state) => state.profile)
+  console.log(user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
