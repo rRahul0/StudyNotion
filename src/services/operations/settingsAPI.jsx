@@ -18,8 +18,8 @@ const {
 export function updateDisplayPicture(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading ...")
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
     try {
-      if (localStorageDelete()) { toast.dismiss(toastId); return }
 
       const response = await apiConnector(
         "PUT",
@@ -53,8 +53,8 @@ export function updateProfile(token, formData) {
 
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
     try {
-      if (localStorageDelete()) { toast.dismiss(toastId); return }
 
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
         Authorization: `Bearer ${token}`,
