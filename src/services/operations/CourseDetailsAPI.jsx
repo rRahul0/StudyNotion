@@ -306,8 +306,9 @@ export const deleteSubSection = async (data, token) => {
 export const fetchInstructorCourses = async (token) => {
   let result = []
   const toastId = toast.loading("Loading...")
+  if (localStorageDelete()) { toast.dismiss(toastId); return }
+
   try {
-    if (localStorageDelete()) { toast.dismiss(toastId); return }
 
     const response = await apiConnector(
       "GET",

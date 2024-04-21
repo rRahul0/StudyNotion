@@ -10,9 +10,9 @@ export default function Instructor() {
   const [loading, setLoading] = useState(false);
   const [instructorData, setInstructorData] = useState(null);
   const [courses, setCourses] = useState([]);
-  const { token } = useSelector((state) => state.auth.token);
+  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-
+console.log(token, "instructordashboard/dashboard/core/components")
   useEffect(() => {
     (async function fetchData() {
       setLoading(true);
