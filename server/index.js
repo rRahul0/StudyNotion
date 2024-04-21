@@ -43,16 +43,7 @@ app.use("/api/v1/auth", userRoutes)
 app.use("/api/v1/course", courseRoutes)
 app.use("/api/v1/payment", paymentsRoutes)
 app.use("/api/v1/profile", profileRoutes)
-app.use("/cookie", (req, res) => {
-    if (req.cookies?.token) {
-        return res.json({
-            success: true,
-            token: req.cookies.token,
-        })
-    }return res.json({
-        success: false,
-    })
-})
+
 
 // default route
 app.get("/", (req, res) => {
@@ -61,4 +52,4 @@ app.get("/", (req, res) => {
         message: "Your Server is Up and running..."
     })
 })
-app.listen(PORT, () => console.log(`http://127.0.0.1:${PORT}`))
+app.listen(PORT, () => console.log(`backend running at port${PORT}`))
