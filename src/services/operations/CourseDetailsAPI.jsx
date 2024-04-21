@@ -2,6 +2,7 @@ import { toast } from "react-hot-toast"
 
 // import { updateCompletedLectures } from "../../slices/viewCourseSlice"
 // import { setLoading } from "../../slices/profileSlice";
+import { localStorageDelete } from "../localStorageDelete"
 import { apiConnector } from "../apiConnector"
 import { courseEndpoints } from "../apis"
 
@@ -47,7 +48,7 @@ export const getAllCourses = async () => {
 export const fetchCourseDetails = async (courseId) => {
   const toastId = toast.loading("Loading...")
   //   dispatch(setLoading(true));
-  let result = null 
+  let result = null
   try {
     const response = await apiConnector("POST", COURSE_DETAILS_API, {
       courseId,
@@ -94,7 +95,9 @@ export const fetchCourseCategories = async () => {
 export const addCourseDetailsAPI = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
-  try { 
+  try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", CREATE_COURSE_API, data, {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
@@ -118,6 +121,8 @@ export const editCourseDetailsAPI = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+   if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", EDIT_COURSE_API, data, {
       "Content-Type": "multipart/form-data",
       AuthoriZation: `Bearer ${token}`,
@@ -145,6 +150,8 @@ export const createSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", CREATE_SECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -153,7 +160,7 @@ export const createSection = async (data, token) => {
       throw new Error("Could Not Create Section")
     }
     toast.success("Course Section Created")
-    result= response?.data?.updatedCourseDetailsAPI
+    result = response?.data?.updatedCourseDetailsAPI
   } catch (error) {
     console.log("CREATE SECTION API ERROR............", error)
     toast.error(error.message)
@@ -167,6 +174,8 @@ export const updateSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("PUT", UPDATE_SECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -189,6 +198,8 @@ export const deleteSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("DELETE", DELETE_SECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -217,6 +228,8 @@ export const createSubSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", CREATE_SUBSECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -226,7 +239,7 @@ export const createSubSection = async (data, token) => {
     }
     toast.success("Lecture Added")
     result = (response?.data?.updatedSection)
-    
+
   } catch (error) {
     console.log("CREATE SUB-SECTION API ERROR............", error)
     toast.error(error.message)
@@ -240,6 +253,8 @@ export const updateSubSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("PUT", UPDATE_SUBSECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -262,6 +277,8 @@ export const deleteSubSection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("DELETE", DELETE_SUBSECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -290,6 +307,8 @@ export const fetchInstructorCourses = async (token) => {
   let result = []
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector(
       "GET",
       GET_ALL_INSTRUCTOR_COURSES_API,
@@ -315,6 +334,8 @@ export const fetchInstructorCourses = async (token) => {
 export const deleteCourse = async (data, token) => {
   const toastId = toast.loading("Loading...")
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("DELETE", DELETE_COURSE_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -336,6 +357,8 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
   //   dispatch(setLoading(true));
   let result = null
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+    
     const response = await apiConnector(
       "POST",
       GET_FULL_COURSE_DETAILS_AUTHENTICATED,
@@ -368,7 +391,8 @@ export const markLectureAsComplete = async (data, token) => {
   console.log("mark complete data", data)
   const toastId = toast.loading("Loading...")
   try {
-    // console.log(data)
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", LECTURE_COMPLETION_API, data, {
       Authorization: `Bearer ${token}`,
     })
@@ -398,6 +422,8 @@ export const createRating = async (data, token) => {
   let success = false
   let message = "";
   try {
+    if (localStorageDelete()) { toast.dismiss(toastId); return }
+
     const response = await apiConnector("POST", CREATE_RATING_API, data, {
       Authorization: `Bearer ${token}`,
     })

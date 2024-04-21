@@ -34,7 +34,7 @@ export default function Dashboard() {
 
       {/* modal hidden */}
       <div className="h-[calc(100vh-3.6rem)]  w-full  ">
-        <div className="h-full mx-auto overflow-y-auto pt-5 px-[10%] ">
+        <div className="h-full mx-auto overflow-y-auto lg:overflow-x-hidden pt-5 max-[350px]:px-5 px-[10%] md:flex flex-col gap-5 items-center ">
           <div
             className="md:hidden relative -left-[10%] ">
             <div className=" text-richblack-100 flex justify-center items-center  w-10 h-10 rounded-full bg-richblack-600 "

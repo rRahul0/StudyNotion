@@ -10,7 +10,7 @@ export default function MyProfile() {
     const navigate = useNavigate();
     return (
        
-            <div className=' w-full lg:w-[792px] px-5 sm:px-10  '>
+            <div className=' w-full lg:w-[792px] sm:px-10  '>
                 <h1 className="mb-14 text-3xl font-medium text-richblack-5">My Profile</h1>
  
                 {/* part-1 */}
@@ -18,8 +18,10 @@ export default function MyProfile() {
                     <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-x-4">
                         <img src={user?.image} className='aspect-square w-[78px] rounded-full object-cover ' />
                         <div className=" space-y-4 sm:space-y-1">
-                            <p className="text-lg font-semibold text-richblack-5">{user?.firstName + " " + user?.lastName}</p>
-                            <p className="text-sm text-richblack-300">{user?.email}</p>
+                            <p className="text-lg font-semibold text-richblack-5">{
+                            user?.firstName + " " + user?.lastName}</p>
+                            <p className="text-sm text-richblack-300">{
+                            user?.email.length>21? user?.email.substring(0,21)+"..." : user?.email}</p>
                         </div>
                     </div>
                     <IconButton
@@ -64,8 +66,8 @@ export default function MyProfile() {
                 
                             <div>
                                 <p className="mb-2 text-sm text-richblack-600">Email</p>
-                                <p className="text-sm font-medium text-richblack-5">
-                                    {user?.email}
+                                <p className="text-sm font-medium text-richblack-5">{
+                            user?.email.length>21? user?.email.substring(0,21)+"..." : user?.email}
                                 </p>
                             </div>
                             

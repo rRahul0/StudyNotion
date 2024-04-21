@@ -58,7 +58,7 @@ export default function ChangeProfilePicture() {
   }, [imageFile])
 
   return (
-    <div className="flex items-center justify-center md:justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5 w-full md:w-[700px] sm:px-10">
+    <div className="flex items-center justify-center md:justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5 w-full lg:w-[700px] sm:px-10">
       <div className="flex flex-col md:flex-row items-center gap-4 ">
         <img 
         src={previewSource || user?.image}
