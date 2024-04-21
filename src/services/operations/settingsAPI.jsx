@@ -65,10 +65,10 @@ export function updateProfile(token, formData) {
         throw new Error(response.data.message)
       }
       const newUser = JSON.parse(localStorage.getItem("user"))
-      console.log(response.data.profileDetails)
+
       newUser.value.additionalDetails = response.data.profileDetails
       dispatch(setUser(newUser))
-      localStorage.setItem("user", JSON.stringify({ value: newUser, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
+      localStorage.setItem("user", JSON.stringify({ value: newUser.value, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
       toast.success("Profile Updated Successfully")
     } catch (error) {
       console.log("UPDATE_PROFILE_API API ERROR............", error)
