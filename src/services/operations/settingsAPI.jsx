@@ -39,7 +39,7 @@ export function updateDisplayPicture(token, formData) {
       }
       toast.success("Display Picture Updated Successfully")
       dispatch(setUser(response.data?.data))
-      localStorage.setItem("user", JSON.stringify({value:response.data?.data, expiry:Date.nom()+1000*60*60*24*7}))
+      localStorage.setItem("user", JSON.stringify({value:response.data?.data, expiry:Date.now()+1000*60*60*24*7}))
     } catch (error) {
       console.log("UPDATE_DISPLAY_PICTURE_API ERROR............", error)
       toast.error("Could Not Update Display Picture")
