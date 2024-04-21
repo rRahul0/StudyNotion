@@ -10,9 +10,9 @@ export default function Instructor() {
   const [loading, setLoading] = useState(false);
   const [instructorData, setInstructorData] = useState(null);
   const [courses, setCourses] = useState([]);
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth.token);
   const { user } = useSelector((state) => state.profile);
-console.log(token, "instructordashboard/dashboard/core/components")
+
   useEffect(() => {
     (async function fetchData() {
       setLoading(true);
@@ -55,7 +55,7 @@ console.log(token, "instructordashboard/dashboard/core/components")
         </div>
       ) : courses.length ? (
         <div>
-          <div className="my-4 flex h-[450px] space-x-4">
+          <div className="my-4 flex flex-col gap-10 lg:flex-row lg:h-[450px] ">
             {totalEarnings >0 || totalStudents > 0 ? (
               <InstructorChart courses={instructorData} />
             ) : (
@@ -94,7 +94,7 @@ console.log(token, "instructordashboard/dashboard/core/components")
                 <p className="text-xs font-semibold text-yellow-50">View all</p>
               </Link>
             </div>
-            <div className="my-4 flex items-start space-x-6">
+            <div className="my-4 flex flex-wrap gap-10 items-start max-md:justify-center ">
               {courses.slice(0, 3).map((course) => (
                 <div key={course._id}>
                   <img src={course.thumbnail} alt={course.courseName} className="h-[201px] w-full rounded-md object-cover" />
