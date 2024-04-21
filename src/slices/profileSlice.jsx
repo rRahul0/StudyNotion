@@ -13,7 +13,7 @@ import { toast } from 'react-hot-toast';
 // }
 const initialState = {
     loading: false,
-    user: localStorage.getItem("user")? JSON.parse(localStorage.getItem("user")).value.value:null,
+    user: localStorage.getItem("user")? JSON.parse(localStorage.getItem("user")).value:null,
     open: false,
 }
 const profileSlice = createSlice({
