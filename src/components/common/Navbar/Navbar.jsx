@@ -15,7 +15,6 @@ import ResponsiveNav from "./ResponsiveNav";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
-  console.log(token)
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
   const [subLinks, setSubLinks] = useState([]);
