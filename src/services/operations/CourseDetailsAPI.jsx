@@ -309,7 +309,6 @@ export const fetchInstructorCourses = async (token) => {
   if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
-
     const response = await apiConnector(
       "GET",
       GET_ALL_INSTRUCTOR_COURSES_API,
