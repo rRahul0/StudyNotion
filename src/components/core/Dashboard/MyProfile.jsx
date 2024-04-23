@@ -21,7 +21,7 @@ export default function MyProfile() {
                             <p className="text-lg font-semibold text-richblack-5">{
                             user?.firstName + " " + user?.lastName}</p>
                             <p className="text-sm text-richblack-300">{
-                            user?.email.length>21? user?.email.substring(0,21)+"..." : user?.email}</p>
+                            user?.email.length>25? user?.email.substring(0,25)+"..." : user?.email}</p>
                         </div>
                     </div>
                     <IconButton
