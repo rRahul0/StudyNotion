@@ -46,7 +46,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
       {open && (
         <div
           className={`${open ? "flex flex-col gap-2" : "hidden"
-            } w-[180px] text-richblack-50 absolute z-30 -top-5 -right-3 border border-richblack-600 bg-richblack-800 py-4 rounded-md items-center transition-all ease-in-out duration-200`}
+            } w-[180px] text-richblack-50 absolute z-30 -top-3 -right-3 border border-richblack-600 bg-richblack-800 py-4 rounded-md items-center transition-all ease-in-out duration-200`}
           onClick={(e) => e.stopPropagation()}
           ref={ref}
         >
