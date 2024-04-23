@@ -16,7 +16,7 @@ export default function MyProfile() {
                 {/* part-1 */}
                 <div className="flex flex-col sm:flex-row gap-8 sm:gap-0 justify-center items-center sm:justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 sm:p-8 px-5 sm:px-12 ">
                     <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-x-4">
-                        <img src={user?.image} className='aspect-square w-[78px] rounded-full object-cover ' />
+                        <img src={user?.image} className='aspect-square w-[78px] rounded-full object-cover border-2 border-richblack-200' />
                         <div className=" space-y-4 sm:space-y-1">
                             <p className="text-lg font-semibold text-richblack-5">{
                             user?.firstName + " " + user?.lastName}</p>

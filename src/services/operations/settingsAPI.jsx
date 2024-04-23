@@ -65,9 +65,9 @@ export function updateProfile(token, formData) {
         throw new Error(response.data.message)
       }
       const newUser = JSON.parse(localStorage.getItem("user"))
-
+      newUser.value.firstName = response.data.firstName
+      newUser.value.lastName = response.data.lastName
       newUser.value.additionalDetails = response.data.profileDetails
-// dispatch(setUser(newUser.value))
       localStorage.setItem("user", JSON.stringify({ value: newUser.value, expiry: newUser.expiry }))
       dispatch(setUser(JSON.parse(localStorage.getItem("user")).value))
 

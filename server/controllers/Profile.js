@@ -11,29 +11,31 @@ require("dotenv").config();
 //update profile
 exports.updateProfile = async (req, res) => {
   try {
-    //fetch data from req body
-    const { gender, dateOfBirth = "", about = "", contactNumber } = req.body;
-    //get userId
+    const { firstName, lastName, gender, dateOfBirth = "", about = "", contactNumber } = req.body;
     const id = req.user.id;
 
-    //find profile
     const userProfile = await User.findById(id)
-      .populate("additionalDetails")
-      .exec();
+    if (firstName) userProfile.firstName = firstName
+    if (lastName) userProfile.lastName = lastName
+    if (firstName || lastName) await userProfile.save()
+
     const profileId = userProfile.additionalDetails;
     const profileDetails = await Profile.findById(profileId);
-    //update profile
+
 
     profileDetails.dateOfBirth = dateOfBirth;
     profileDetails.about = about;
     profileDetails.contactNumber = contactNumber;
     profileDetails.gender = gender;
     await profileDetails.save();
+
+
     //return response
     return res.status(200).json({
       success: true,
       message: "profile update successfully",
       profileDetails,
+      firstName, lastName
     });
   } catch (error) {
     return res.status(500).json({
@@ -52,13 +54,13 @@ exports.deleteAccount = async (req, res) => {
     const id = req.user.id;
     //user exist?
     const userDetails = await User.findById(id)
-    .select("courses accountType additionalDetails")
-    .populate({
-      path: "courses",
-      populate: {
-        path: "studentEnrolled",
-      },
-    });
+      .select("courses accountType additionalDetails")
+      .populate({
+        path: "courses",
+        populate: {
+          path: "studentEnrolled",
+        },
+      });
 
     //validation
     if (!userDetails) {
