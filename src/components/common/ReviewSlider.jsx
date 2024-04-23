@@ -14,7 +14,7 @@ import { ratingsEndpoints } from "../../services/apis";
 
 const ReviewSlider = ({ courseId }) => {
   const [reviews, setReviews] = useState([]);
-  const truncateWords = 15;
+  const truncateWords = 35;
 
   useEffect(() => {
     (async () => {
@@ -64,7 +64,7 @@ const ReviewSlider = ({ courseId }) => {
             <SwiperSlide key={i} className="rounded-lg">
               <div className="flex flex-col items-center gap-3 p-3 text-[14px] text-richblack-25">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 ">
+                  <div className="w-14 h-14">
                     <img
                       src={
                         review?.user?.image
