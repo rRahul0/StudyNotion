@@ -4,7 +4,7 @@ import { HiOutlineGlobeAlt } from "react-icons/hi";
 // import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { toast } from "react-hot-toast";
 import ConfirmationModal from "../components/common/ConfirmationModel";
 import Footer from "../components/common/Footer";
 import RatingStars from "../components/common/RatingStars";
@@ -184,9 +184,8 @@ export default function CourseDetails() {
               <div>
                 <p className="">
                   {
-                    instructor?"hi":"helo"
+                    instructor? `Created By ${instructor.firstName} ${instructor.lastName}`:""
                   }
-                  Created By {`${instructor.firstName} ${instructor.lastName}`}
                 </p>
               </div>
               <div className="flex flex-wrap gap-5 text-lg">

@@ -64,7 +64,7 @@ export default function ChangeProfilePicture() {
         src={previewSource?previewSource : user?.image}
         {...console.log("user image", user?.image)}
         alt={`profile-${user?.firstName}`} 
-        className="aspect-square w-[78px] rounded-full object-cover" />
+        className="aspect-square w-[78px] rounded-full object-cover border-2 border-richblack-200" />
 
         <div className="space-y-2 flex flex-col md:justify-center items-center md:items-start">
           <p>Change profile picture</p>
