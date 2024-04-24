@@ -16,6 +16,8 @@ const {
 
 const { auth } = require("../middlewares/auth")
 
+const {contactUsController} = require("../controllers/ContactUs")
+
 // Routes for Login, Signup, and Authentication
 
 // ********************************************************************************************************
@@ -45,4 +47,5 @@ router.post("/reset-password-token", resetPasswordToken)
 router.post("/reset-password", resetPassword)
 
 // Export the router for use in the main application
+router.post("/contactus", contactUsController)
 module.exports = router

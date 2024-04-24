@@ -5,7 +5,7 @@ exports.mailSender = async (email, subject, body) => {
     try {
 
         let info = await transporter.sendMail({
-            from: 'StudyNotion',
+            from: `StudyNotion | Rahul Karmakar <${process.env.MAIL_USER}>`,
             to: `${email}`,
             subject: `${subject}`,
             html: `${body}`,
