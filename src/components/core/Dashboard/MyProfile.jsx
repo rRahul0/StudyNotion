@@ -57,13 +57,18 @@ export default function MyProfile() {
                             <RiFileEditFill className='text-richblack-800 text-lg' />
                         </IconButton>
                     </div>
-                    <div className="flex flex-col sm:flex-row max-w-[500px] justify-between ">
+                    <div className="flex flex-col gap-5 sm:flex-row max-w-[500px] justify-between ">
                         <div className="flex flex-col gap-y-5">
                             <div>
                                 <p className="mb-2 text-sm text-richblack-600">First Name</p>
                                 <p className="text-sm font-medium text-richblack-5">{user?.firstName}</p>
                             </div>
-                
+                            <div>
+                                <p className="mb-2 text-sm text-richblack-600">Last Name</p>
+                                <p className="text-sm font-medium text-richblack-5">
+                                    {user?.lastName}
+                                </p>
+                            </div>
                             <div>
                                 <p className="mb-2 text-sm text-richblack-600">Email</p>
                                 <p className="text-sm font-medium text-richblack-5">{
@@ -79,12 +84,7 @@ export default function MyProfile() {
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-5">
-                            <div>
-                                <p className="mb-2 text-sm text-richblack-600">Last Name</p>
-                                <p className="text-sm font-medium text-richblack-5">
-                                    {user?.lastName}
-                                </p>
-                            </div>
+                            
 
                             <div>
                                 <p className="mb-2 text-sm text-richblack-600">Phone Number</p>
