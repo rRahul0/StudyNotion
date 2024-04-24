@@ -1,5 +1,7 @@
+require("dotenv").config();
+
 exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
     <html>
     
     <head>
@@ -67,8 +69,9 @@ exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
     
     <body>
         <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app"><img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"
-                    alt="StudyNotion Logo"></a>
+            <a href=${process.env.FRONTEND_URL}>
+            <img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"  alt="StudyNotion Logo">
+            </a>
             <div class="message">Course Payment Confirmation</div>
             <div class="body">
                 <p>Dear ${name},</p>
