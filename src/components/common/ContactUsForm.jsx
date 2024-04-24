@@ -1,28 +1,38 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import CountryCode from '../../data/countrycode.json';
+import { apiConnector } from '../../services/apiConnector';
+import { contactusEndpoint } from '../../services/apis';
+import { toast } from 'react-hot-toast';
 
 export default function ContactUsForm() {
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isSubmitSuccessful }
     } = useForm();
-    const submitContactForm = async (data) => {
+    const submitContactForm = async (data,e) => {
+        const toastId = toast.loading("Loading ...")
         try {
             setLoading(true);
-            console.log(data);
-            const response = { status: "ok" };
-            console.log("Logging response: ", response);
+            e.preventDefault()
+            const res = await apiConnector(
+                "POST",
+                contactusEndpoint.CONTACT_US_API,
+                data
+              )
+              console.log(res)
             setLoading(false);
         } catch (error) {
-            console.log("dfgh");
-            console.log("Error: ", error.message);
+            console.log("Error: ", error);
             setLoading(false);
         }
+        toast.dismiss(toastId)
     }
     useEffect(() => {
         if (isSubmitSuccessful) {
