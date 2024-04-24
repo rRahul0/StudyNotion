@@ -55,20 +55,12 @@ exports.capturePayment = async (req, res) => {
       amount: totalAmount * 100,
       currency,
       receipt: Math.random(Date.now()).toString(),
-      // notes: {
-      //     courseId: course_id,
-      //     UserId,
-      // }
     };
 
     try {
       const paymentResponse = await instance.orders.create(options);
-      // console.log(paymentResponse, "payment response");
       return res.status(200).json({
         success: true,
-        // courseName: course.courseName,
-        // courseDescription: course.courseDescription,
-        // thumbnail: course.thumbnail,
         orderId: paymentResponse.id,
         currency: paymentResponse.currency,
         amount: paymentResponse.amount,
