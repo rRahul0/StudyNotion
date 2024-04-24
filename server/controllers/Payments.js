@@ -5,7 +5,8 @@ const User = require("../models/User");
 const { mailSender } = require("../utilis/mailSender");
 const crypto = require("crypto");
 const CourseProgress = require("../models/CourseProgress");
-
+const {paymentSuccessEmail}  = require("../mail/template/paymentSuccessEmail")
+const {courseEnrollmentEmail}  = require("../mail/template/courseEnrollmentEmail")
 //for multiple item
 
 //initiate capture payment
@@ -150,7 +151,7 @@ const enrollStudent = async (courses, userId, res) => {
           .status(500)
           .json({ success: false, message: "Course Not Found" });
       }
- 
+
       const courseProgress = await CourseProgress.create({
         courseID: courseId,
         userId: userId,
@@ -174,8 +175,10 @@ const enrollStudent = async (courses, userId, res) => {
       await mailSender(
         enrolledStudent.email,
         `Enrolled in ${enrolledCourse.courseName}`,
-        `<h1>Congratulation!! ${enrolledStudent.firstName} ${enrolledStudent.lastName}</h1>\n
-                 You are enrolled in ${enrolledCourse.courseName}`
+        courseEnrollmentEmail(
+          `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
+          `${enrolledCourse.courseName}`
+        )
       );
       // console.log("enroll student")
     } catch (error) {
@@ -199,11 +202,13 @@ exports.sendPaymentSuccessfullEmail = async (req, res) => {
     await mailSender(
       enrolledStudent.email,
       "Payment Received",
-      `${enrolledStudent.firstName} ${enrolledStudent.lastName}\n 
-             amount: ${amount}\n
-             order_id: ${orderId}\n
-             payment_id: ${paymentId}\n
-            `
+      paymentSuccessEmail(
+        `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
+        `${amount/100}`,
+        `${orderId}`,
+        `${paymentId}`
+      )
+
     );
     // console.log("mail send")
   } catch (error) {
