@@ -33,7 +33,6 @@ export default function ChipInput({
   useEffect(() => {
     setValue(name, chips)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // console.log(getValues()[name])
   }, [chips])
 
   // Function to handle user input when chips are added
@@ -41,8 +40,7 @@ export default function ChipInput({
     
     // Check if user presses "Enter" or ","
     // console.log(event)
-    if (event.key === "Enter" || event.key === "," || event.keyCode ===188 || event.code ==="Comma"
-  ) {
+    if (event.key === "Enter" || event.key === "," ) {
       // Prevent the default behavior of the event
       event.preventDefault()
       // Get the input value and remove any leading/trailing spaces
@@ -97,9 +95,7 @@ export default function ChipInput({
           id={name}
           name={name}
           type="text"
-          placeholder={placeholder}
-          onClick={handleKeyDown}
-          
+          placeholder={placeholder}          
           onKeyDown={handleKeyDown}
           className="form-style w-full"
         />
