@@ -71,7 +71,6 @@ exports.getAverageRating = async (req, res) => {
     try {
         //get courseId
         const { courseId } = req.body
-
         //calculate average rating
         const result = await RatingandReview.aggregate([
             {
