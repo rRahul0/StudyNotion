@@ -58,7 +58,8 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
             "image": rzpLogo,
             "order_id": orderResponse.data.message.id,
             "handler": function (response) {
-                sendPaymentSuccessfullEmail(response, orderResponse.data.message.amount, token)
+                //add receipt
+                sendPaymentSuccessfullEmail(response, orderResponse.data.message.amount, orderResponse.data.message.receipt, token)
                 verifyPayment({ ...response, courses }, token, navigate, dispatch)
             },
             "prefill": {
@@ -88,8 +89,9 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
     toast.dismiss(toastId)
 }
 
-async function sendPaymentSuccessfullEmail(response, amount, token) {
-    // console.log(response, amount, token) 
+async function sendPaymentSuccessfullEmail(response, amount, receipt, token) {
+    // add print 
+    print(receipt)
     try {
         await apiConnector("POST", SEND_PAYMENT_SUCCESS_EMAIL_API, {
             orderId: response.razorpay_order_id,
