@@ -38,8 +38,10 @@ export default function ChipInput({
 
   // Function to handle user input when chips are added
   const handleKeyDown = (event) => {
+    
     // Check if user presses "Enter" or ","
-    if (event.key === "Enter" || event.key === "," 
+    // console.log(event)
+    if (event.key === "Enter" || event.key === "," || event.keyCode ===188 || event.code ==="Comma"
   ) {
       // Prevent the default behavior of the event
       event.preventDefault()
@@ -97,6 +99,7 @@ export default function ChipInput({
           type="text"
           placeholder={placeholder}
           onClick={handleKeyDown}
+          
           onKeyDown={handleKeyDown}
           className="form-style w-full"
         />
