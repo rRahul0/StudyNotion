@@ -22,9 +22,9 @@ export default function Dashboard() {
   useOnClickOutside(ref, () => dispatch(setOpen(false)));
 
   return (
-    <div className="flex relative ">
+    <div className="flex relative transition-all duration-500 ">
       <div className="relative  md:relative flex " ref={ref}>
-        <div className="hidden md:block">
+        <div className="hidden md:block ">
           <Sidebar />
         </div> 
         

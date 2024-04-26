@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RatingStars from "../../common/RatingStars";
 import GetAvgRating from "../../../utils/AvgRating";
+import { getAverageRating } from "../../../services/operations/CatalogPageData";
 
 export default function CourseTemplet({ course, Height }) {
+  // console.log(course);
   const [avgRatingCount, setAvgRatingCount] = useState(0);
 
   useEffect(() => {
-    const count = GetAvgRating(course?.ratingAndreviews);
-    setAvgRatingCount(count);
+    (async function AvgRating() {
+      const response = await getAverageRating(course?._id);
+      setAvgRatingCount(response.averageRating);
+    })();
+    
   }, [course]);
   
   return (

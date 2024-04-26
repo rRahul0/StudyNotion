@@ -26,7 +26,7 @@ export default function Sidebar() {
   useOnClickOutside(ref, () => dispatch(setOpen(true)));
 
   return (
-    <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.6rem)] bg-richblack-800 pt-5 pb-10 absolute z-10 md:relative">
+    <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.6rem)] bg-richblack-800 pt-5 pb-10 absolute z-10 md:relative transition-all duration-1000">
       <div
         className="w-full relative flex justify-end px-5 pb-3"
         onClick={() => dispatch(setOpen(!open))}
