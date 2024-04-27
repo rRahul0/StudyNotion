@@ -176,33 +176,31 @@ exports.signUp = async (req, res) => {
 //login
 exports.login = async (req, res) => {
   try {
-    //extract data from req.body
-    const { email, password } = req.body;
-
-    //validation
+    const { email, password, Key } = req.body;
     if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
-
-    //user registered?
     const isExistUser = await User.findOne({ email })
       .populate("additionalDetails")
       .exec();
-    // console.log(isExistUser)
-    //if not
     if (!isExistUser) {
       return res.status(400).json({
         success: false,
         message: "user doesn't exist you have to registered first",
       });
     }
-    // console.log(isExistUser.password)
+     if(Key && Key !== process.env.ADMIN_KEY){
+      return res.status(400).json({
+        success: false,
+        message: "Invalid key",
+      });
+    }
+
     //password matching
     if (await bcrypt.compare(password, isExistUser.password)) {
-      //create token
       const payload = {
         id: isExistUser._id,
         email: isExistUser.email,
@@ -215,16 +213,13 @@ exports.login = async (req, res) => {
       isExistUser.token = token;
       isExistUser.password = undefined;
 
-      //create cookie
       const options = {
         expiresIn: new Date(Date.now() + 60 * 1000),
         // maxAge: 60*1000,
         httpOnly: true,
         secure: true,
-        // domain: "127.0.0.1",
         sameSite: "none",
       };
-      // console.log("hello world1")
 
       return res.cookie("token", token, options).status(200).json({
         success: true,
@@ -232,7 +227,6 @@ exports.login = async (req, res) => {
         user: isExistUser,
         message: "Loggedin sucessfully",
       });
-      // console.log("hello world")
     } else {
       return res.status(400).json({
         success: false,
