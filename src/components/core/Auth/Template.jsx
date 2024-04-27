@@ -8,10 +8,7 @@ import { useState } from "react"
 
 function Template({ title, desc1, desc2, image, formtype }) {
   const { loading } = useSelector((state) => state.auth)
-  const [admin, setAdmin] = useState(false)
   return (
-    <>
-      <div className="m-3 p-2 border-2 border-richblack-5 bg-richblack-300 w-20 rounded-3xl flex justify-center items-center text-richblack-5 cursor-pointer" onClick={()=>setAdmin(true)}>Admin</div>
       <div className="grid min-h-[calc(100vh-8.5rem)] place-items-center">
         {loading ? (
           <Loader />
@@ -28,7 +25,7 @@ function Template({ title, desc1, desc2, image, formtype }) {
                   {desc2}
                 </span>
               </p>
-              {formtype === "signup" ? <SignupForm admin={admin} /> : <LoginForm admin={admin} />}
+              {formtype === "signup" ? <SignupForm /> : <LoginForm />}
             </div>
             <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
               <img
@@ -50,7 +47,6 @@ function Template({ title, desc1, desc2, image, formtype }) {
           </div>
         )}
       </div>
-    </>
 
   )
 }

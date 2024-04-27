@@ -176,7 +176,7 @@ exports.signUp = async (req, res) => {
 //login
 exports.login = async (req, res) => {
   try {
-    const { email, password, Key } = req.body;
+    const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -190,12 +190,6 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "user doesn't exist you have to registered first",
-      });
-    }
-     if(Key && Key !== process.env.ADMIN_KEY){
-      return res.status(400).json({
-        success: false,
-        message: "Invalid key",
       });
     }
 

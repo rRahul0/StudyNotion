@@ -11,13 +11,11 @@ function LoginForm({admin}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    Key: ""
   })
 
   const [showPassword, setShowPassword] = useState(false)
-  const [showKey, setShowKey] = useState(false)
 
-  const { email, password,Key } = formData
+  const { email, password } = formData
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
@@ -28,7 +26,7 @@ function LoginForm({admin}) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(email, password, Key, navigate)) 
+    dispatch(login(email, password, navigate)) 
   }
 
   return (
@@ -54,35 +52,6 @@ function LoginForm({admin}) {
         />
       </label>
 
-      {admin &&
-      <label className="relative">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Secret Key <sup className="text-pink-200">*</sup>
-        </p>
-        <input
-          required
-          type={showKey ? "text" : "password"}
-          name="Key"
-          value={Key}
-          onChange={handleOnChange}
-          placeholder="Enter Secret Key"
-          style={{
-            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-          }}
-          className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5"
-        />
-        <span
-          onClick={() => setShowKey((prev) => !prev)}
-          className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-        >
-          {showKey ? (
-            <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-          ) : (
-            <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-          )}
-        </span>
-        
-      </label>}
 
       <label className="relative">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">

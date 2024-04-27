@@ -79,7 +79,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
                 // token?console.log("yes"):console.log("no")
                 <div className=" flex justify-center items-center">
                   {token && (
-                    <ProfilrDropDown ItemClick={() => setOpen(!open)} />
+                    <ProfilrDropDown />
                   )}
                 </div>
               }
