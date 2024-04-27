@@ -52,8 +52,17 @@ function App() {
         <Route path="/catalog/:catalogName" element={<Catalog />} />
         <Route path="/courses/:courseId" element={<CourseDetails />} />
 
+
         <Route
-          path="signup"
+          path="/signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path= "/adminSignup/:secretKey"
           element={
             <OpenRoute>
               <Signup />

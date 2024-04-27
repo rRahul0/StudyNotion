@@ -26,7 +26,6 @@ export function sendOtp(email, navigate) {
       })
       console.log("SENDOTP API RESPONSE............", response)
 
-      console.log(response.data.success)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -51,20 +50,13 @@ export function signUp(
   confirmPassword,
   accountType,
   otp,
+  secretKey,
   navigate
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      console.log(firstName,
-        lastName,
-        email,
-        password,
-        confirmPassword,
-        accountType,
-        otp,
-      );
       // console.log(otp);
       const response = await apiConnector("POST", SIGNUP_API, {
         accountType,
@@ -74,6 +66,7 @@ export function signUp(
         password,
         confirmPassword,
         otp,
+        secretKey
       })
 
       console.log("SIGNUP API RESPONSE............", response)

@@ -74,6 +74,7 @@ exports.signUp = async (req, res) => {
       confirmPassword,
       accountType,
       otp,
+      secretKey,
     } = req.body;
     // console.log(otp, "backend")
     //data validate
@@ -100,6 +101,18 @@ exports.signUp = async (req, res) => {
       });
     }
 
+    if(accountType==="admin" && !secretKey){
+      return res.status(400).json({
+        success: false,
+        message: "Secret Key not found",
+      });
+    }
+    if(secretKey && secretKey !==process.env.ADMIN_KEY){
+      return res.status(400).json({
+        success: false,
+        message: "Secret Key not matched",
+      });
+    }
     //check user already exist
     const existingUser = await User.findOne({ email });
     // console.log(req.body.otp, "104")

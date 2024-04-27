@@ -27,6 +27,7 @@ export default function VerifyEmail() {
             email,
             password,
             confirmPassword,
+            secretKey
         } = signupData;
         dispatch(signUp(firstName,
             lastName,
@@ -35,9 +36,9 @@ export default function VerifyEmail() {
             confirmPassword,
             accountType,
             otp,
+            secretKey,
             navigate
         ));
-        console.log(otp)
     }
     return (
         <div className='text-white h-[calc(100vh-3.6rem)] flex justify-center items-center'>
