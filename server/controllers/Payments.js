@@ -65,7 +65,6 @@ exports.capturePayment = async (req, res) => {
         currency: paymentResponse.currency,
         amount: paymentResponse.amount,
         message: paymentResponse,
-        receipt: paymentResponse.receipt
       });
     } catch (error) {
       // console.log(error);
@@ -181,7 +180,7 @@ const enrollStudent = async (courses, userId, res) => {
 };
 
 exports.sendPaymentSuccessfullEmail = async (req, res) => {
-  const { orderId, paymentId, amount, receipt } = req.body;
+  const { orderId, paymentId, amount } = req.body;
   const userId = req.user.id;
 
   if (!orderId || !paymentId || !amount || !userId) {
@@ -199,7 +198,6 @@ exports.sendPaymentSuccessfullEmail = async (req, res) => {
         `${amount/100}`,
         `${orderId}`,
         `${paymentId}`,
-        `${receipt}`
       )
 
     );
