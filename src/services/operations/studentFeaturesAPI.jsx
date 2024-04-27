@@ -48,6 +48,7 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
         if (!orderResponse.data.success) {
             throw new Error(orderResponse.data.message)
         }
+
         //options
         var options = {
             "key": RAZORPAY_KEY,
@@ -59,7 +60,7 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
             "order_id": orderResponse.data.message.id,
             "handler": function (response) {
                 //add receipt
-                sendPaymentSuccessfullEmail(response, orderResponse.data.message.amount, orderResponse.data.message.receipt, token)
+                sendPaymentSuccessfullEmail(response, orderResponse.data.message.amount, token)
                 verifyPayment({ ...response, courses }, token, navigate, dispatch)
             },
             "prefill": {
@@ -89,15 +90,13 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
     toast.dismiss(toastId)
 }
 
-async function sendPaymentSuccessfullEmail(response, amount, receipt, token) {
+async function sendPaymentSuccessfullEmail(response, amount, token) {
     // add print 
-    print(receipt);
     try {
         await apiConnector("POST", SEND_PAYMENT_SUCCESS_EMAIL_API, {
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
             amount,
-            receipt
         }, {
             Authorization: `Bearer ${token}`
         })
