@@ -181,7 +181,7 @@ const enrollStudent = async (courses, userId, res) => {
 };
 
 exports.sendPaymentSuccessfullEmail = async (req, res) => {
-  const { orderId, paymentId, amount } = req.body;
+  const { orderId, paymentId, amount, receipt } = req.body;
   const userId = req.user.id;
 
   if (!orderId || !paymentId || !amount || !userId) {
@@ -198,7 +198,8 @@ exports.sendPaymentSuccessfullEmail = async (req, res) => {
         `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
         `${amount/100}`,
         `${orderId}`,
-        `${paymentId}`
+        `${paymentId}`,
+        `${receipt}`
       )
 
     );
