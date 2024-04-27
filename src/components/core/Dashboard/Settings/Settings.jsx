@@ -12,7 +12,7 @@ export default function Settings() {
     <div className='my-14'>
       <h1 className=" mb-14 text-3xl font-medium text-richblack-5  ">Edit Profile</h1>
       {/* Change Profile Picture */}
-      <ChangeProfilePicture />  
+      <ChangeProfilePicture />
 
 
       {/* Profile */}
@@ -24,9 +24,7 @@ export default function Settings() {
 
 
       {/* Delete Account */}
-      {user.accountType !== "admin" &&
-        <DeleteAccount />
-      }
+      {user.accountType !== "admin" && <DeleteAccount />}
     </div>
   )
 }
