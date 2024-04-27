@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { sendOtp } from "../../../services/operations/authAPI";
 import { setSignupData } from "../../../slices/authSlice";
@@ -10,11 +11,12 @@ import { ACCOUNT_TYPE } from "../../../utils/constants";
 import Tab from "../../common/Tab";
 
 function SignupForm() {
+  const { secretKey } = useParams();
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // student or instructor
-  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  const [accountType, setAccountType] = useState(secretKey?ACCOUNT_TYPE.ADMIN:ACCOUNT_TYPE.STUDENT)
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -48,6 +50,7 @@ function SignupForm() {
     const signupData = {
       ...formData,
       accountType,
+      secretKey,
     }
 
     // Setting signup data to state
@@ -81,12 +84,14 @@ function SignupForm() {
     },
   ]
 
+
+
   return (
     <div>
       {/* Tab */}
-      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
+      {!secretKey && <Tab tabData={tabData} field={accountType} setField={setAccountType} />}
       {/* Form */}
-      <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4 ">
+      <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4 mt-10 ">
         <div className="flex gap-x-4">
           <label>
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
@@ -95,7 +100,7 @@ function SignupForm() {
             <input
               required
               type="text"
-              name="firstName" 
+              name="firstName"
               value={firstName}
               onChange={handleOnChange}
               placeholder="Enter first name"
