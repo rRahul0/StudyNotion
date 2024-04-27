@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
+exports.paymentSuccessEmail = (name, amount, orderId, paymentId, receipt) => {
     return `<!DOCTYPE html>
     <html>
     
@@ -78,6 +78,7 @@ exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
                 <p>We have received a payment of <span class='highlight'>₹${amount}</span></p>.
                 <p>Your Payment ID is <b>${paymentId}</b></p>
                 <p>Your Order ID is <b>${orderId}</b></p>
+                <p>Receipt: ${receipt} </p>
             </div>
             <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
                     href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>

@@ -91,12 +91,13 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
 
 async function sendPaymentSuccessfullEmail(response, amount, receipt, token) {
     // add print 
-    print(receipt)
+    print(receipt);
     try {
         await apiConnector("POST", SEND_PAYMENT_SUCCESS_EMAIL_API, {
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
-            amount
+            amount,
+            receipt
         }, {
             Authorization: `Bearer ${token}`
         })
