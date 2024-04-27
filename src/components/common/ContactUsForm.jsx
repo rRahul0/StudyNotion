@@ -58,7 +58,7 @@ export default function ContactUsForm() {
                             name='firstname'
                             id='firstname'
                             placeholder='Enter first name'
-                            {...register("firstname", { required: true })}
+                            {...register("firstName", { required: true })}
                             style={{
                                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                             }}
@@ -75,7 +75,7 @@ export default function ContactUsForm() {
                             name='lastname'
                             id='lastname'
                             placeholder='Enter last name'
-                            {...register("lastname", { required: true })}
+                            {...register("lastName", { required: true })}
                             style={{
                                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                             }}
@@ -168,7 +168,8 @@ export default function ContactUsForm() {
                     </label>
                 </div>
 
-                <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px]  font-semibold text-lg text-richblack-900">
+                <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px]  font-semibold text-lg text-richblack-900"
+                disabled={loading}>
                     Send Message
                 </button>
             </div>
