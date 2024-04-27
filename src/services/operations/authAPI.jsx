@@ -93,12 +93,12 @@ export function signUp(
   }
 }
 
-export function login(email, password, navigate) {
+export function login(email, password, Key, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      const response = await apiConnector("POST", LOGIN_API, { email, password })
+      const response = await apiConnector("POST", LOGIN_API, { email, password, Key })
 
       console.log("LOGIN API RESPONSE............", response)
 
