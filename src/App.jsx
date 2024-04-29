@@ -35,6 +35,8 @@ import {Category} from "./components/core/Dashboard/AddCategory/Category";
 import {Categories} from "./components/core/Dashboard/AllCategory/index";
 import {Messages} from "./components/core/Dashboard/ContactMessages/Messages";
 import SingleMessage from "./components/core/Dashboard/ContactMessages/SingleMessage";
+import Admin from "./components/core/Dashboard/AdminDashboard/Admin";
+
 function App() {
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
@@ -141,11 +143,7 @@ function App() {
               <Route path="/dashboard/all-category" element={<Categories />} />
               <Route path="/dashboard/contactus" element={<Messages />} />
               <Route path="/dashboard/message/:msgId" element={<SingleMessage />} />
-
-
-
-              <Route path="/dashboard/instructor" element={<Instructor />} />
-              
+              <Route path="/dashboard/admin" element={<Admin />} />             
               <Route
                 path="/dashboard/edit-course/:courseId"
                 element={<EditCourse />}

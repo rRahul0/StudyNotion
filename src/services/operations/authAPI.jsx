@@ -234,3 +234,26 @@ export async function deleteMessage(token, id) {
   toast.dismiss(toastId)
   return result
 }
+
+export async function getAdminData(token) {
+  const toastId = toast.loading("Loading...")
+  let result;
+  try {
+    const response = await apiConnector("GET", endpoints.GET_ADMIN_DATA_API, null, {
+      Authorization: `Bearer ${token}`,
+    })
+
+    console.log(" admin data ...........", response.data.data)
+    console.log(" admin data ...........", response)
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+
+    result=response.data.data
+  } catch (error) {
+    console.log("GET ALL MESSAGES API ERROR............", error)
+    toast.error("Could Not Get Messages")
+  }
+  toast.dismiss(toastId)
+  return result
+}

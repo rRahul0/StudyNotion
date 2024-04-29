@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const OTP = require("../models/OTP");
+const Course = require("../models/Course");
+const Category = require("../models/Category");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -310,3 +312,40 @@ exports.changePassword = async (req, res) => {
     });
   }
 };
+
+exports.getAdminData = async (req, res) => {
+  try {
+    const instructor = await User.find({ accountType: "instructor" }).countDocuments();
+    const students = await User.find({ accountType: "student" }).countDocuments();
+    const categories = await Category.find({}).populate("courses");
+    const courses = await Course.find({status:"Published"});
+  
+    const cat = categories.map((category) => category.courses.filter((course) => course.status === 'Published')
+    );
+    const categoryData = categories.map((category) => {
+      return {
+        id: category?._id,
+        name: category?.name,
+        income: category?.courses?.reduce((acc, course) => acc + course?.studentEnrolled?.length * course?.price, 0),
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      data:{
+        instructor,
+        students,
+        courses,
+        categoryData,
+        cat
+      },
+      categories
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error occurred while fetching data",
+      error: error.message,
+    });
+  }
+}
