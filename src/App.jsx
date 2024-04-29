@@ -31,19 +31,14 @@ import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import VideoDetailsSidebar from "./components/core/ViewCourse/VideoDetailsSidebar";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
+import {Category} from "./components/core/Dashboard/AddCategory/Category";
+import {Categories} from "./components/core/Dashboard/AllCategory/index";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const getCookie = async () => {
-  //     const result = await apiConnector("GET", "http://127.0.0.1:5000/cookie");
-  //     console.log(result?.data?.success, result?.data?.token);
-  //     // if(result?.data?.success)dispatch(setToken(result?.data?.token))
-  //   };
-  //   getCookie();
-  // }, []);
+ 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter border">
       <Navbar />
@@ -130,6 +125,20 @@ function App() {
           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
               <Route path="/dashboard/add-course" element={<AddCourse />} />
+              <Route path="/dashboard/instructor" element={<Instructor />} />
+              <Route path="/dashboard/my-courses" element={<MyCourse />} />
+              <Route
+                path="/dashboard/edit-course/:courseId"
+                element={<EditCourse />}
+              />
+            </>
+          )}
+           {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+            <>
+              <Route path="/dashboard/add-category" element={<Category />} />
+              <Route path="/dashboard/edit-category/:categoryId" element={<Category />} />
+              <Route path="/dashboard/all-category" element={<Categories />} />
+
               <Route path="/dashboard/instructor" element={<Instructor />} />
               <Route path="/dashboard/my-courses" element={<MyCourse />} />
               <Route

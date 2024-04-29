@@ -1,5 +1,7 @@
 const { default: mongoose } = require('mongoose')
 const Category = require('../models/Category')
+const {isAdmin} = require('../middlewares/auth')
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
   }
@@ -9,7 +11,6 @@ exports.createCategory = async (req, res) => {
     try {
         //fetch data from req body
         const { name, description } = req.body
-
         //validation
         if (!name) {
             return res.status(400).json({
@@ -17,16 +18,22 @@ exports.createCategory = async (req, res) => {
                 message: "All fields are required",
             })
         }
-
+        const present = await Category.findOne({ name })
+        if (present) {
+            return res.status(400).json({
+                success: false,
+                message: "Category already exists",
+            })
+        }
         //Tag entry in DB
         const tagDetails = await Category.create({
-            name: name,
-            decsription: decsription,
+            name,
+            description,
         })
         // console.log(tagDetails)
 
         //return response
-        return res.status(400).json({
+        return res.status(200).json({
             success: true,
             message: "Tag created successfully",
             tagDetails
@@ -40,13 +47,83 @@ exports.createCategory = async (req, res) => {
     }
 }
 
+exports.updateCategory = async (req, res) => {
+    try {
+        //fetch data from req body
+        const { name, description, categoryId } = req.body
+        //validation
+        if (!name || !categoryId) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
+            })
+        }
+
+        //Tag entry in DB
+        const tagDetails = await Category.findByIdAndUpdate(categoryId, {
+            name,
+            description,
+        }, { new: true })
+        // console.log(tagDetails)
+
+        //return response
+        return res.status(200).json({
+            success: true,
+            message: "Tag updated successfully",
+            tagDetails
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+exports.deleteCategory = async (req, res) => {
+    try {
+        //fetch data from req body
+        const { categoryId } = req.body
+        //validation
+        if (!categoryId) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
+            })
+        }
+
+        //Tag entry in DB
+        const category = await Category.findById(categoryId)
+        if (category.courses.length > 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Category has courses, cannot delete",
+            })
+        }
+        const tagDetails = await Category.findByIdAndDelete(categoryId)
+
+        //return response
+        return res.status(200).json({
+            success: true,
+            message: "Tag deleted successfully",
+            tagDetails
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
 
 //get All Tags
 exports.showAllCategories = async (req, res) => {
     try {
         //find all tags
         // , { name: true, decsription: true }
-        const allTags = await Category.find({}, { name: true, decsription: true, courses:true })
+        const allTags = await Category.find({})
 
         //return response
         return res.status(200).json({
@@ -143,4 +220,5 @@ exports.categoryPageDetails = async (req, res) => {
       })
     }
   }
+
 

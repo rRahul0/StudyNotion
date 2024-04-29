@@ -20,38 +20,38 @@ const CourseBuilderForm = () => {
 
 
   // handle form submission
-  const onSubmit = async (data) => {
-    setLoading(true)
+    const onSubmit = async (data) => {
+      setLoading(true)
 
-    let result
+      let result
 
-    if (editSectionName) {
-      result = await updateSection(
-        {
-          sectionName: data.sectionName,
-          sectionId: editSectionName,
-          courseId: course._id,
-        },
-        token
-      )
-      // console.log("edit", result)
-    } else {
-      result = await createSection(
-        {
-          sectionName: data.sectionName,
-          courseId: course._id,
-        },
-        token
-      )
+      if (editSectionName) {
+        result = await updateSection(
+          {
+            sectionName: data.sectionName,
+            sectionId: editSectionName,
+            courseId: course._id,
+          },
+          token
+        )
+        // console.log("edit", result)
+      } else {
+        result = await createSection(
+          {
+            sectionName: data.sectionName,
+            courseId: course._id,
+          },
+          token
+        )
+      }
+      if (result) {
+        // console.log("section result", result)
+        dispatch(setCourse(result))
+        setEditSectionName(null)
+        setValue("sectionName", "")
+      }
+      setLoading(false)
     }
-    if (result) {
-      // console.log("section result", result)
-      dispatch(setCourse(result))
-      setEditSectionName(null)
-      setValue("sectionName", "")
-    }
-    setLoading(false)
-  }
 
   const cancelEdit = () => {
     setEditSectionName(null)
