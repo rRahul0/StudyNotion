@@ -8,6 +8,7 @@ const {
     signUp,
     sendOTP,
     changePassword,
+    getAdminData
 } = require("../controllers/Auth")
 const {
     resetPasswordToken,
@@ -50,4 +51,5 @@ router.post("/reset-password", resetPassword)
 router.post("/contactus", contactUsController)
 router.get("/allcontactmsg",auth, isAdmin, getAllMessages)
 router.delete("/deletecontactmsg/:id",auth, isAdmin, deleteMessage)
+router.get("/admin-data", auth, isAdmin, getAdminData)
 module.exports = router

@@ -19,7 +19,6 @@ export default function Instructor() {
       const response = await getInstructorData(token);
       const result = await fetchInstructorCourses(token);
      
-
       if (response) setInstructorData(response);
       if (result) setCourses(result);
       setLoading(false);
@@ -28,13 +27,10 @@ export default function Instructor() {
   }, []);
 
   const totalEarnings = courses.reduce(
-    
-    (acc, course) => acc + course.studentEnrolled.length*course.price,
-    0
+    (acc, course) => acc + course.studentEnrolled.length*course.price, 0
   );
   const totalStudents = courses.reduce(
-    (acc, course) => acc + course.studentEnrolled.length,
-    0
+    (acc, course) => acc + course.studentEnrolled.length, 0
   );
 
   return (
@@ -78,7 +74,7 @@ export default function Instructor() {
                 </div>
                 <div>
                   <p className="text-lg text-richblack-200">Total Income</p>
-                  <p className="text-3xl font-semibold text-richblack-50">Rs. {totalEarnings}</p>
+                  <p className="text-3xl font-semibold text-richblack-50">₹ {Math.round(totalEarnings*0.8)}</p>
                 </div>
               </div>
             </div>
