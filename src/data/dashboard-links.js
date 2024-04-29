@@ -57,9 +57,16 @@ export const sidebarLinks = [
     icon: "VscMail",
   },
   {
-    id: 9,
+    id:9,
+    name: "All Categories",
+    path: "/dashboard/all-category",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscOutput",
+  },
+  {
+    id: 10,
     name: "Add Category",
-    path: "/dashboard/createCategory",
+    path: "/dashboard/add-category",
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscAdd",
   },
