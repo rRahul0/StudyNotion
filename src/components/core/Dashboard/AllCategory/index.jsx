@@ -53,9 +53,9 @@ export function Categories() {
                 <Table className="rounded-xl border border-richblack-600  my-10">
                     <Thead>
                         <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-4 bg-richblack-800">
+                            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Categores</Th>
+                            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Description</Th>
                             <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Courses</Th>
-                            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Duration</Th>
-                            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Price</Th>
                             <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Actions</Th>
 
                         </Tr>
@@ -73,8 +73,8 @@ export function Categories() {
                                                 {category.name}
                                             </Td>
                                             <Td className="text-sm font-medium text-richblack-100">
-                                                {category.description.length > 15 ?
-                                                    category.description.substring(0, 15) + " ..." :
+                                                {category.description.length > 30 ?
+                                                    category.description.substring(0, 30) + " ..." :
                                                     category.description}
                                             </Td>
                                             <Td className="text-sm font-medium text-richblack-100">
