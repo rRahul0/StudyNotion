@@ -64,46 +64,11 @@ export function Categories() {
                         {
                             categories.length === 0 ?
                                 (<Tr>
-                                    <Td className="py-10 text-center text-2xl font-medium text-richblack-100">No Courses Found</Td>
+                                    <Td className="py-10 text-center text-2xl font-medium text-richblack-100">No Category Found</Td>
                                 </Tr>) : (
                                     categories.map((category, index) => (
                                         <Tr key={category._id} className="border-b border-richblack-800 px-6 py-8 grid grid-cols-4 gap-12 bg-richblack-700">
-                                            {/* <Td className="flex flex-1 gap-x-4 ">
-                                            <img
-                                                src={course?.thumbnail}
-                                                alt={course?.courseName}
-                                                className="h-[148px] w-[220px] rounded-lg object-cover"
-                                            />
-                                            <div className="flex flex-col justify-between">
-                                                <p className="text-lg font-semibold text-richblack-5">{course.courseName}</p>
-                                                <p className="text-xs text-richblack-300">
-                                                    {course.courseDescription.split(" ").length >
-                                                        TRUNCATE_LENGTH
-                                                        ? course.courseDescription
-                                                            .split(" ")
-                                                            .slice(0, TRUNCATE_LENGTH)
-                                                            .join(" ") + "..."
-                                                        : course.courseDescription}
-                                                </p>
-                                                <p className="text-[12px] text-white">
-                                                    Created: {formatDate(course.createdAt)}
-                                                </p>
-                                                {
-                                                    course.status === COURSE_STATUS.DRAFT ?
-                                                        (<p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-pink-100">
-                                                            <HiClock size={14} />
-                                                            Drafted
-                                                        </p>) : (
-                                                            <div className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
-                                                                <div className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
-                                                                    <FaCheck size={8} />
-                                                                </div>
-                                                                Published
-                                                            </div>
-                                                        )
-                                                }
-                                            </div>
-                                        </Td> */}
+                                         
                                             <Td className="text-sm font-medium text-richblack-100 ">
                                                 {category.name}
                                             </Td>
