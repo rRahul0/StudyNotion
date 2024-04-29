@@ -243,8 +243,7 @@ export async function getAdminData(token) {
       Authorization: `Bearer ${token}`,
     })
 
-    console.log(" admin data ...........", response.data.data)
-    console.log(" admin data ...........", response)
+    console.log(" ADMIN DATA RESPONSE ...........", response.data.data)
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
