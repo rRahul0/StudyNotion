@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     loading: false,
-    category: null
+    category: localStorage.getItem("category")? JSON.parse(localStorage.getItem("category")): null
 }
 const categorySlice = createSlice({
     name: 'category',

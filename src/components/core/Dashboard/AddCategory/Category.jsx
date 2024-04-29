@@ -31,7 +31,7 @@ export function Category() {
         }
         dataTake()
 
-    }, [categoryId])
+    }, [])
     const onSubmit = async (data) => {
         setLoading(true)
 
