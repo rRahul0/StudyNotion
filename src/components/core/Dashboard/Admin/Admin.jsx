@@ -19,7 +19,6 @@ export default function Admin() {
         async function fetchData() {
             setLoading(true);
             const response = await getAdminData(token);
-            // console.log(response)
             setUsers(response.instructor + response.students)
             setAdminData(response);
             setLoading(false);
