@@ -33,7 +33,8 @@ import VideoDetailsSidebar from "./components/core/ViewCourse/VideoDetailsSideba
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
 import {Category} from "./components/core/Dashboard/AddCategory/Category";
 import {Categories} from "./components/core/Dashboard/AllCategory/index";
-
+import {Messages} from "./components/core/Dashboard/ContactMessages/Messages";
+import SingleMessage from "./components/core/Dashboard/ContactMessages/SingleMessage";
 function App() {
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
@@ -138,9 +139,13 @@ function App() {
               <Route path="/dashboard/add-category" element={<Category />} />
               <Route path="/dashboard/edit-category/:categoryId" element={<Category />} />
               <Route path="/dashboard/all-category" element={<Categories />} />
+              <Route path="/dashboard/contactus" element={<Messages />} />
+              <Route path="/dashboard/message/:msgId" element={<SingleMessage />} />
+
+
 
               <Route path="/dashboard/instructor" element={<Instructor />} />
-              <Route path="/dashboard/my-courses" element={<MyCourse />} />
+              
               <Route
                 path="/dashboard/edit-course/:courseId"
                 element={<EditCourse />}

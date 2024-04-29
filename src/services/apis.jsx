@@ -66,6 +66,8 @@ export const catalogData = {
 // CONTACT-US API
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/auth/contactus",
+  CONTACT_US_MESSAGES_API: BASE_URL + "/auth/allcontactmsg",
+  CONTACT_US_MESSAGE_API: BASE_URL + "/auth/deletecontactmsg",
 }
 
 // SETTINGS PAGE API
