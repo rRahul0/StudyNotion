@@ -226,7 +226,7 @@ const CourseInformationForm = () => {
       <ChipInput
         label="Tags"
         name="courseTags"
-        placeholder="Enter Tags and press Enter"
+        placeholder="Enter Tags and press Enter or ,"
         register={register}
         errors={errors}
         setValue={setValue}
