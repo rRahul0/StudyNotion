@@ -24,6 +24,9 @@ export function Category() {
             if (categoryId) {
                 setValue("categoryName", category.name)
                 setValue("categoryDesc", category.description)
+            } else {
+                setValue("categoryName", "")
+                setValue("categoryDesc", "")
             }
         }
         dataTake()
@@ -35,13 +38,11 @@ export function Category() {
         let result
 
         if (editCategory) {
-            // setValue("categoryName", data.categoryName)
-            // setValue("categoryDesc", data.categoryDesc)
             result = await updateCategory(
                 editCategory,
-                    data.categoryName,
-                    data.categoryDesc,
-                    token
+                data.categoryName,
+                data.categoryDesc,
+                token
             )
             console.log("edit", result)
             navigate("/dashboard/all-category")
@@ -55,8 +56,6 @@ export function Category() {
             )
         }
         if (result) {
-            // console.log("section result", result)
-            // dispatch(setCourse(result))
             setEditCategory(null)
             setValue("categoryName", "")
             setValue("categoryDesc", "")
@@ -73,7 +72,9 @@ export function Category() {
     }
     return (
         <div className=" max-w-[600px] space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
-            <p className="text-2xl font-semibold text-richblack-5">Add Category</p>
+            <p className="text-2xl font-semibold text-richblack-5">
+                {editCategory ? "Edit Category" : "Add Category"}
+            </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="flex flex-col gap-7">
