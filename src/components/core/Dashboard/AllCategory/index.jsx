@@ -41,7 +41,8 @@ export function Categories() {
     const handleEdit = (categoryId) => {
         const category = categories.find(category => category._id === categoryId)
         dispatch(setCategory(category))
-        setCategory(category)
+        localStorage.setItem("category", JSON.stringify(category))
+        // setCategory(category)
         navigate(`/dashboard/edit-category/${categoryId}`)
     }
 
