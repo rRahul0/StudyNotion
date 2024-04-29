@@ -38,12 +38,13 @@ export default function ChipInput({
   // Function to handle user input when chips are added
   const handleKeyDown = (event) => {
     
-    // Check if user presses "Enter" or ","
-    // console.log(event)
-    if (event.key === "Enter" || event.key === "," ) {
+    if (event.key === "Enter" || event.nativeEvent.data === "," ) {
       // Prevent the default behavior of the event
       event.preventDefault()
       // Get the input value and remove any leading/trailing spaces
+      if(event.target.value.at(-1) === ","){
+        event.target.value = event.target.value.slice(0, -1)
+      }
       const chipValue = event.target.value.trim()
       // Check if the input value exists and is not already in the chips array
       if (chipValue && !chips.includes(chipValue)) {
@@ -95,7 +96,8 @@ export default function ChipInput({
           id={name}
           name={name}
           type="text"
-          placeholder={placeholder}          
+          placeholder={placeholder}  
+          onInput={handleKeyDown}        
           onKeyDown={handleKeyDown}
           className="form-style w-full"
         />
