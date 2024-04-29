@@ -22,9 +22,9 @@ export default function Dashboard() {
   useOnClickOutside(ref, () => dispatch(setOpen(false)));
 
   return (
-    <div className="flex relative transition-all duration-500 ">
+    <div className="flex relative  ">
       <div className="relative  md:relative flex " ref={ref}>
-        <div className="hidden md:block ">
+        <div className="hidden md:block transition-all duration-1000">
           <Sidebar />
         </div>
 
@@ -33,19 +33,21 @@ export default function Dashboard() {
       </div>
 
       {/* modal hidden */}
-      <div className="sm:h-[calc(100vh-3.6rem)]  w-full  ">
-        <div className=" mx-auto overflow-y-auto lg:overflow-x-hidden pt-5  px-[10%] flex flex-col gap-5 md:hidden relative -left-[6%] ">
+      <div className=" w-full  h-[calc(100vh-3.6rem)] overflow-y-scroll px-3  sm:px-10 ">
+        <div className=" mx-auto overflow-y-auto lg:overflow-x-hidden pt-5  ">
+          <div className="px-[10%] flex flex-col gap-5 md:hidden relative -left-[10%] mb-5">
 
-          <div className=" text-richblack-100 flex justify-center items-center  w-10 h-10 rounded-full bg-richblack-600 "
-            onClick={() => dispatch(setOpen(!open))}
-          >
-            <FaGreaterThan />
+
+            <div className=" text-richblack-100 flex justify-center items-center  w-10 h-10 rounded-full bg-richblack-600 "
+              onClick={() => dispatch(setOpen(!open))}
+            >
+              <FaGreaterThan />
+            </div>
 
           </div>
-        </div>
-        <div className=" p-5 max-[370px]:px-3">
-        <Outlet />
-        </div>
+          <Outlet />
+
+        </div>        
       </div>
     </div>
   );

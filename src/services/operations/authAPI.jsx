@@ -6,6 +6,7 @@ import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
 import { localStorageDelete } from "../localStorageDelete"
+import { contactusEndpoint } from "../apis"
 
 const {
   SENDOTP_API,
@@ -102,8 +103,8 @@ export function login(email, password, navigate) {
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
       dispatch(setUser(response.data.user))
-      localStorage.setItem("token", JSON.stringify({value:response.data.token, expiry: Date.now() + 1000*60*60*24*7}))
-      localStorage.setItem("user", JSON.stringify({value:response.data.user, expiry: Date.now() + 1000*60*60*24*7}))
+      localStorage.setItem("token", JSON.stringify({ value: response.data.token, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
+      localStorage.setItem("user", JSON.stringify({ value: response.data.user, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
@@ -183,4 +184,53 @@ export function logout(navigate) {
     toast.success("Logged Out")
     navigate("/")
   }
+}
+
+
+
+//contact messages
+// allcontactmsg
+export async function getAllMessages(token) {
+  const toastId = toast.loading("Loading...")
+  let result=[];
+  try {
+    const response = await apiConnector("GET", contactusEndpoint.CONTACT_US_MESSAGES_API, null, {
+      Authorization: `Bearer ${token}`,
+    })
+    console.log(" ALL MESSAGES ...........", response)
+
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+
+    if(response.data.success)result = response.data.allMessages
+  } catch (error) {
+    console.log("GET ALL MESSAGES API ERROR............", error)
+    toast.error("Could Not Get Messages")
+  }
+  toast.dismiss(toastId)
+  return result
+}
+
+export async function deleteMessage(token, id) {
+  let result;
+  const toastId = toast.loading("Loading...")
+  try {
+    const response = await apiConnector("DELETE", contactusEndpoint.CONTACT_US_MESSAGE_API+`/${id}`, null, {
+      Authorization: `Bearer ${token}`,
+    })
+    console.log(" DELETE MESSAGE ...........", response)
+
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+    result  = response.data
+
+    toast.success("Message Deleted Successfully")
+  } catch (error) {
+    console.log("DELETE MESSAGE API ERROR............", error)
+    toast.error("Could Not Delete Message")
+  }
+  toast.dismiss(toastId)
+  return result
 }
