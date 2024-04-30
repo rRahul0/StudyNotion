@@ -10,8 +10,7 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import ConfirmationModal from '../../../common/ConfirmationModel'
 import { deleteCategory } from '../../../../services/operations/Category'
 import { useNavigate } from 'react-router-dom'
-import { setCategory } from '../../../../slices/categorySlice'
-import { useDispatch } from 'react-redux'
+
 export function Categories() {
     const { token } = useSelector(state => state.auth)
 
@@ -19,31 +18,25 @@ export function Categories() {
     const [loading, setLoading] = useState(false)
     const [confirmationModal, setConfirmationModal] = useState(null)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
-    const fetchCourse = async () => {
-        const result = await fetchCourseCategories(token)
-        if (result) setCategories(result)
-    }
-    useEffect(() => { fetchCourse() }, [])
+    // const fetchCourse = 
+    useEffect(() => {
+        (async () => {
+            const result = await fetchCourseCategories(token)
+            if (result) setCategories(result)
+        })()
+    }, [])
 
     const handleCategoryDelete = async (categoryId) => {
         setLoading(true)
-        try {
-            const res = await deleteCategory(categoryId, token)
-            if(res.success)setCategories(categories.filter(category => category._id !== categoryId))
-        } catch (error) {
-            console.log("not deleted")
-        }
+        await deleteCategory(categoryId, token)
+        setCategories(categories.filter(category => category._id !== categoryId))
         setConfirmationModal(null)
         setLoading(false)
     }
     const handleEdit = (categoryId) => {
         const category = categories.find(category => category._id === categoryId)
-        dispatch(setCategory(category))
-        localStorage.setItem("category", JSON.stringify(category))
-        // setCategory(category)
-        navigate(`/dashboard/edit-category/${categoryId}`)
+        navigate(`/dashboard/edit-category/${categoryId}`, {state:{data:category}})
     }
 
     return (
@@ -69,7 +62,7 @@ export function Categories() {
                                 </Tr>) : (
                                     categories.map((category, index) => (
                                         <Tr key={category._id} className="border-b border-richblack-800 px-6 py-8 grid grid-cols-4 gap-12 bg-richblack-700">
-                                         
+
                                             <Td className="text-sm font-medium text-richblack-100 ">
                                                 {category.name}
                                             </Td>
@@ -84,7 +77,7 @@ export function Categories() {
                                             <Td>
                                                 <button
                                                     disabled={loading}
-                                                    onClick={()=>handleEdit(category._id)}
+                                                    onClick={() => handleEdit(category._id)}
                                                     title="Edit"
                                                     className="text-richblack-25 px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
                                                 >
