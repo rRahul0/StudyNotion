@@ -16,6 +16,8 @@ const {
   RESETPASSWORD_API,
 } = endpoints
 
+
+
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
@@ -103,8 +105,8 @@ export function login(email, password, navigate) {
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
       dispatch(setUser(response.data.user))
-      localStorage.setItem("token", JSON.stringify({ value: response.data.token, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
-      localStorage.setItem("user", JSON.stringify({ value: response.data.user, expiry: Date.now() + 1000 * 60 * 60 * 24 * 7 }))
+      localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
@@ -149,7 +151,6 @@ export function resetPassword(password, confirmPassword, token, navigate) {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      if (localStorageDelete()) { toast.dismiss(toastId); return }
 
       const response = await apiConnector("POST", RESETPASSWORD_API, {
         password,
@@ -193,7 +194,6 @@ export function logout(navigate) {
 export async function getAllMessages(token) {
   const toastId = toast.loading("Loading...")
   let result=[];
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
   try {
     const response = await apiConnector("GET", contactusEndpoint.CONTACT_US_MESSAGES_API, null, {
       Authorization: `Bearer ${token}`,
@@ -216,7 +216,6 @@ export async function getAllMessages(token) {
 export async function deleteMessage(token, id) {
   let result;
   const toastId = toast.loading("Loading...")
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
     const response = await apiConnector("DELETE", contactusEndpoint.CONTACT_US_MESSAGE_API+`/${id}`, null, {
@@ -241,7 +240,6 @@ export async function deleteMessage(token, id) {
 export async function getAdminData(token) {
   const toastId = toast.loading("Loading...")
   let result;
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
     const response = await apiConnector("GET", endpoints.GET_ADMIN_DATA_API, null, {

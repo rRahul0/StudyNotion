@@ -5,9 +5,10 @@ import { getUserEnrolledCourses } from "../../../services/operations/profileAPI"
 import Loader from "../../common/Loader";
 import { useNavigate } from "react-router-dom";
 
-export default function () {
+export default function EnrolledCourses() {
   const { token } = useSelector((state) => state.auth);
   const [enrolledCourses, setEnrolledCourses] = useState(null);
+  
   const getEnrolledCourses = async () => {
     try {
       const response = await getUserEnrolledCourses(token);

@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast"
-
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { apiConnector } from "../apiConnector"
 import { profileEndpoints } from "../apis"
 import { localStorageDelete } from "../localStorageDelete"
@@ -9,10 +10,10 @@ const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA
 
 //ekhono kaje lageni
 export function getUserDetails(token, navigate) {
+    // const navigate = useNavigate()
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
-        if (localStorageDelete()) { toast.dismiss(toastId); return }
 
         try {
 
@@ -40,8 +41,8 @@ export function getUserDetails(token, navigate) {
 
 export async function getUserEnrolledCourses(token) {
     let result = []
+    const toastId = toast.loading("Loading...")
     try {
-        if (localStorageDelete()) { toast.dismiss(toastId); return }
 
         const response = await apiConnector(
             "GET",
@@ -60,13 +61,13 @@ export async function getUserEnrolledCourses(token) {
         console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
         toast.error("Could Not Get Enrolled Courses")
     }
+    toast.dismiss(toastId)
     return result
 }
 
 export async function getInstructorData(token) {
     const toastId = toast.loading("Loading...")
     let result = []
-    if (localStorageDelete()) { toast.dismiss(toastId); return }
 
     try {
 

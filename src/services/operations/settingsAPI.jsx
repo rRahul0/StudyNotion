@@ -18,7 +18,6 @@ const {
 export function updateDisplayPicture(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading ...")
-    if (localStorageDelete()) { toast.dismiss(toastId); return }
     try {
 
       const response = await apiConnector(
@@ -39,7 +38,7 @@ export function updateDisplayPicture(token, formData) {
       }
       toast.success("Display Picture Updated Successfully")
       dispatch(setUser(response.data?.data))
-      localStorage.setItem("user", JSON.stringify({value:response.data?.data, expiry:Date.now()+1000*60*60*24*7}))
+      localStorage.setItem("user", JSON.stringify(response.data?.data))
     } catch (error) {
       console.log("UPDATE_DISPLAY_PICTURE_API ERROR............", error)
       toast.error("Could Not Update Display Picture")
@@ -53,7 +52,6 @@ export function updateProfile(token, formData) {
 
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
-    if (localStorageDelete()) { toast.dismiss(toastId); return }
     try {
 
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
@@ -65,11 +63,11 @@ export function updateProfile(token, formData) {
         throw new Error(response.data.message)
       }
       const newUser = JSON.parse(localStorage.getItem("user"))
-      newUser.value.firstName = response.data.firstName
-      newUser.value.lastName = response.data.lastName
-      newUser.value.additionalDetails = response.data.profileDetails
-      localStorage.setItem("user", JSON.stringify({ value: newUser.value, expiry: newUser.expiry }))
-      dispatch(setUser(JSON.parse(localStorage.getItem("user")).value))
+      newUser.firstName = response.data.firstName
+      newUser.lastName = response.data.lastName
+      newUser.additionalDetails = response.data.profileDetails
+      localStorage.setItem("user", JSON.stringify(newUser))
+      dispatch(setUser(JSON.parse(localStorage.getItem("user"))))
 
       toast.success("Profile Updated Successfully")
     } catch (error) {
@@ -83,7 +81,6 @@ export function updateProfile(token, formData) {
 
 export async function changePassword(token, formData) {
   const toastId = toast.loading("Loading...")
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
     const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
@@ -107,7 +104,6 @@ export function deleteProfile(token, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {
-      if (localStorageDelete()) { toast.dismiss(toastId); return }
 
       const response = await apiConnector("DELETE", DELETE_PROFILE_API, null, {
         Authorization: `Bearer ${token}`,

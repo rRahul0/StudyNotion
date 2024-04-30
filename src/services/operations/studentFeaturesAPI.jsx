@@ -33,7 +33,6 @@ export const buyCourse = async (token, courses, userDetails, navigate, dispatch)
     // console.log("buy course", courses, token, userDetails)
     const toastId = toast.loading("Loading...")
     try {
-        if (localStorageDelete()) { toast.dismiss(toastId); return }
 
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
         if (!res) { toast.error("Razorpay SDK failed to load") }

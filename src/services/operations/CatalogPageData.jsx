@@ -7,7 +7,6 @@ import { localStorageDelete } from '../localStorageDelete'
 export const getCatalogPageData = async (categoryId) => {
   const toastId = toast.loading("Loading...");
   let result = [];
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
     const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API,
@@ -32,7 +31,6 @@ export const getCatalogPageData = async (categoryId) => {
 export const getAverageRating = async (courseId) => {
   const toastId = toast.loading("Loading...");
   let result;
-  if (localStorageDelete()) { toast.dismiss(toastId); return }
 
   try {
     const response = await apiConnector("POST", catalogData.AVERAGE_RATING_API,

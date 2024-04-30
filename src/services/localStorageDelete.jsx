@@ -1,11 +1,26 @@
-import toast  from "react-hot-toast";
+import toast from "react-hot-toast";
+import { logout } from "./operations/authAPI";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export const localStorageDelete = () => {
-    const userToken = JSON.parse(localStorage.getItem("token"))
-    if (userToken?.expiry < Date.now()) {
-        if(localStorage.getItem("token")){localStorage.removeItem("token")}
-        if(localStorage.getItem("user"))localStorage.removeItem("user")
-        toast.error("Session Expired. Please Login Again")
-        return true
-    }return false
+    // console.log("cvjxbn")
+if(JSON.parse(localStorage.getItem("token")).expiry < Date.now())console.log("expired")
+    // const dispatch = useDispatch()
+    // const navigate = useNavigate()
+    // console.log("cmbxvmncx,mv")
+
+    return <>
+        {
+            JSON.parse(localStorage.getItem("token")).expiry < Date.now() ? (
+                <>
+                    {dispatch(logout(navigate))}
+                    {toast.error("Token Expired")}
+
+                </>
+            ) : (
+                false
+            )
+        }
+    </>
 }

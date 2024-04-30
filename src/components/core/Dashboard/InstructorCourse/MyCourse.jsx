@@ -14,10 +14,7 @@ function MyCourse() {
 
     const fetchCourse = async () => {
         const result = await fetchInstructorCourses(token)
-        if (result)
-             setCourses(result)
-            //  setDuration(result)}
-        console.log(result)
+        if (result) setCourses(result)
     }
     useEffect(() => {fetchCourse()}, [])
     return (
