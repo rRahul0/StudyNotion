@@ -234,7 +234,7 @@ exports.login = async (req, res) => {
         success: true,
         token,
         user: isExistUser,
-        message: "Loggedin sucessfully",
+        message: "Loggedin sucessfully",  
       });
     } else {
       return res.status(400).json({
