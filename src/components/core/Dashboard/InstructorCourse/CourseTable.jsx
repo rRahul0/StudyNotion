@@ -41,7 +41,7 @@ function CourseTable({ courses, setCourses, duration }) {
     return (
         <div>
             <Table className="rounded-xl border border-richblack-600  ">
-                <Thead>
+                <Thead >
                     <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2">
                         <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Courses</Th>
                         <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">Duration</Th>
@@ -57,8 +57,10 @@ function CourseTable({ courses, setCourses, duration }) {
                                 <Td className="py-10 text-center text-2xl font-medium text-richblack-100">No Courses Found</Td>
                             </Tr>) : (
                                 courses.map((course, index) => (
-                                    <Tr key={course._id} className="flex gap-x-10 border-b border-richblack-800 px-6 py-8">
-                                        <Td className="flex flex-1 gap-x-4 ">
+
+                                    <Tr key={course._id} className="grid grid-cols-4 gap-x-10 border-b border-richblack-800 px-6 py-8 ">
+                                       {/* flex flex-1 gap-x-4 */}
+                                        <Td className=" ">
                                             <img
                                                 src={course?.thumbnail}
                                                 alt={course?.courseName}
