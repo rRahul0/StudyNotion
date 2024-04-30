@@ -16,14 +16,13 @@ export default function Admin() {
     const { user } = useSelector((state) => state.profile);
 
     useEffect(() => {
-        async function fetchData() {
+        (async function fetchData() {
             setLoading(true);
             const response = await getAdminData(token);
             setUsers(response.instructor + response.students)
             setAdminData(response);
             setLoading(false);
-        }
-        fetchData();
+        })();
     }, []);
 
     

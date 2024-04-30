@@ -12,26 +12,24 @@ export function Messages() {
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchMessages() {
-            try {
-                const Messages = await getAllMessages(token);
-                setAllMessages(Messages)
-            } catch (error) {
-                console.log("GET ALL MESSAGES API ERROR............", error)
-            }
+            const Messages = await getAllMessages(token);
+            setAllMessages(Messages)
         }
         fetchMessages()
     }, [])
     const solveMessage = (message) => {
-        navigate(`/dashboard/message/${message._id}`, 
-        {state:{
-            firstName:message.firstName, 
-            lastName:message.lastName ,
-            email:message.email, 
-            message:message.message, 
-            phoneNo:message.contactNumber.phoneNo, 
-            countryCode:message.contactNumber.countrycode, 
-            _id:message._id
-        }})
+        navigate(`/dashboard/message/${message._id}`,
+            {
+                state: {
+                    firstName: message.firstName,
+                    lastName: message.lastName,
+                    email: message.email,
+                    message: message.message,
+                    phoneNo: message.contactNumber.phoneNo,
+                    countryCode: message.contactNumber.countrycode,
+                    _id: message._id
+                }
+            })
     }
     return (
         <div className=' w-full lg:w-[900px] sm:px-10  '>
@@ -54,13 +52,13 @@ export function Messages() {
                                         <IconButton
                                             text="pending"
                                             customClasses='hover:scale-90  hover:text-richblack-500'
-                                            onClick={()=>solveMessage(message)}
+                                            onClick={() => solveMessage(message)}
                                             children={<MdOutlinePendingActions />}
                                         />
                                     </div>
                                 </div>
                                 <p className='text-richblack-100'>
-                                    {message.message.length>40?message.message.slice(0,40)+'...':message.message}
+                                    {message.message.length > 40 ? message.message.slice(0, 40) + '...' : message.message}
                                 </p>
                             </div>
                         ))
