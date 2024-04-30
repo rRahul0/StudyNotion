@@ -39,7 +39,7 @@ export default function CourseTemplet({ course, Height }) {
                 <span className="text-richblack-400">{course?.ratingAndreviews?.length} Ratings</span>
               </div>
 
-              <p className="text-xl text-richblack-5">rs. {course?.price}</p>
+              <p className="text-xl text-richblack-5">₹ {course?.price}</p>
             </div>
           </div>
         </div>
