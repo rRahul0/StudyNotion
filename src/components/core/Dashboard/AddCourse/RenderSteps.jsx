@@ -26,7 +26,7 @@ const RenderSteps = () => {
 
     return (
 
-        <div className='max-w-[500px]'>
+        <div className='max-w-[600px] md:w-[500px]'>
             <div className="relative mb-2 flex w-full justify-center ">
                 {
                     steps.map((item) => (

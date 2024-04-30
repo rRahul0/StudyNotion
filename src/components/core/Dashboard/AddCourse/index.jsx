@@ -4,11 +4,11 @@ import RenderSteps from './RenderSteps'
 const AddCourse = () => {
   return (
     <div >
-       <div className="flex flex-col lg:flex-row w-full  items-center justify-evenly lg:items-start gap-10 ">
-        <div className="flex flex-col">
+       <div className="flex flex-col lg:flex-row w-full  items-center justify-evenly lg:items-start gap-10 relative">
+        <div className="flex flex-col mb-10">
             <h1 className="mb-14 text-3xl font-medium text-richblack-5">
               Add Course</h1>
-            <div className="flex">
+            <div className="flex border-2">
                 <RenderSteps />
             </div>
         </div>
