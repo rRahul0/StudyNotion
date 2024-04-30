@@ -146,7 +146,7 @@ export function getPasswordResetToken(email, setEmailSent) {
 export function resetPassword(password, confirmPassword, token, navigate) {
   // const navigate=useNavigate();
   return async (dispatch) => {
-    // const toastId = toast.loading("Loading...")
+    const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
       if (localStorageDelete()) { toast.dismiss(toastId); return }
@@ -169,7 +169,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
       console.log("RESETPASSWORD ERROR............", error)
       toast.error("Failed To Reset Password")
     }
-    // toast.dismiss(toastId)
+    toast.dismiss(toastId)
     dispatch(setLoading(false))
   }
 }
@@ -193,6 +193,7 @@ export function logout(navigate) {
 export async function getAllMessages(token) {
   const toastId = toast.loading("Loading...")
   let result=[];
+  if (localStorageDelete()) { toast.dismiss(toastId); return }
   try {
     const response = await apiConnector("GET", contactusEndpoint.CONTACT_US_MESSAGES_API, null, {
       Authorization: `Bearer ${token}`,
@@ -215,6 +216,8 @@ export async function getAllMessages(token) {
 export async function deleteMessage(token, id) {
   let result;
   const toastId = toast.loading("Loading...")
+  if (localStorageDelete()) { toast.dismiss(toastId); return }
+
   try {
     const response = await apiConnector("DELETE", contactusEndpoint.CONTACT_US_MESSAGE_API+`/${id}`, null, {
       Authorization: `Bearer ${token}`,
@@ -238,6 +241,8 @@ export async function deleteMessage(token, id) {
 export async function getAdminData(token) {
   const toastId = toast.loading("Loading...")
   let result;
+  if (localStorageDelete()) { toast.dismiss(toastId); return }
+
   try {
     const response = await apiConnector("GET", endpoints.GET_ADMIN_DATA_API, null, {
       Authorization: `Bearer ${token}`,
