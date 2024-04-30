@@ -19,7 +19,6 @@ function Navbar() {
   const { totalItems } = useSelector((state) => state.cart);
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     (async () => {
       try {

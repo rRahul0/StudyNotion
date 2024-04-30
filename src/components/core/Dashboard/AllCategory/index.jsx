@@ -29,8 +29,8 @@ export function Categories() {
 
     const handleCategoryDelete = async (categoryId) => {
         setLoading(true)
-        await deleteCategory(categoryId, token)
-        setCategories(categories.filter(category => category._id !== categoryId))
+        const res = await deleteCategory(categoryId, token)
+        if(res.success)setCategories(categories.filter(category => category._id !== categoryId))
         setConfirmationModal(null)
         setLoading(false)
     }
