@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import IconButton from '../../../common/IconButton'
 import { updateCategory, createCategory } from '../../../../services/operations/Category'
@@ -16,7 +17,8 @@ export function Category() {
     const [loading, setLoading] = useState(false)
     const [editCategory, setEditCategory] = useState(categoryId ? categoryId : null)
     const navigate = useNavigate()
-    const { category } = useSelector(state => state.category)
+    const location = useLocation()
+    const category = location.state ? location.state.data : null
 
     useEffect(() => {
 
@@ -44,7 +46,6 @@ export function Category() {
                 data.categoryDesc,
                 token
             )
-            console.log("edit", result)
             navigate("/dashboard/all-category")
         } else {
             result = await createCategory(
