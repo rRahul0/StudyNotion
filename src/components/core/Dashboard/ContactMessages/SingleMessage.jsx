@@ -17,8 +17,11 @@ export const SingleMessage = () => {
             {/* Display the message data */}
             <div className='w-full  lg:w-[800px] flex flex-col gap-5 p-10 bg-richblack-700 rounded-lg border-2 border-richblack-500'>
                 <div className='flex flex-col gap-1 text-lg '>
-                    <span>From: {message.firstName}</span>
-                    <span>Email: {message.email}</span>
+                    <span>From: {message.firstName} {message.lastName}</span>
+                    <span>Email: {message.email.length > 25 ?
+                                            message.email.slice(0, 25) + "..." :
+                                            message.email}
+                                        </span>
                     <span>Phone No: {`+${message.countryCode} ${message.phoneNo}`}</span>
                 </div>
                 <p className='w-full'>{message.message}
@@ -31,9 +34,8 @@ export const SingleMessage = () => {
                     >
                         Cancel
                     </button>
-
                     <IconButton
-                        text="solve || delete"
+                        text="solved"
                         onClick={handleDelete}
                     />
                 </div>
