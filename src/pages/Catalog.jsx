@@ -121,7 +121,7 @@ export default function Catalog() {
         <div className=" mx-auto box-content w-full max-w-maxContentTab md:px-4 py-12 lg:max-w-maxContent">
           <p className="section_heading">Frequently Bought</p>
           <div className="py-8">
-            <div className="grid grid-cols-1 justify-start gap-6 lg:grid-cols-2 ">
+            <div className="grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 max-lg:grid-cols-3 max-xl:grid-cols-4 max-2xl:grid-cols-5 2xl:grid-cols-6 justify-start gap-6  ">
               {categoryPageData?.data?.mostSellingCourses
                 ?.slice(0, 4)
                 .map((course, index) => (
