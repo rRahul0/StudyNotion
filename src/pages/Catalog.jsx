@@ -7,11 +7,11 @@ import CourseSlider from "../components/core/Catelog/CourseSlider";
 import { apiConnector } from "../services/apiConnector";
 import CourseTemplet from "../components/core/Catelog/CourseTemplet";
 import Loader from "../components/common/Loader";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Error from "../components/common/Error";
 
 export default function Catalog() {
-    const { loading } = useSelector((state) => state.profile)
+  const { loading } = useSelector((state) => state.profile)
   const { catalogName } = useParams();
   const [active, setActive] = useState(1)
   const [categoryPageData, setCategoryPageData] = useState(null);
@@ -20,7 +20,7 @@ export default function Catalog() {
   useEffect(() => {
     const getCategories = async () => {
       const res = await apiConnector("GET", categories.CATEGORIES_API);
-    //   console.log(res);
+      //   console.log(res);
       const category = res.data.allTags.filter(
         (ctgry) =>
           ctgry.name.split(" ").join("-").toLowerCase() ===
@@ -80,21 +80,19 @@ export default function Catalog() {
           <div className="section_heading">Courses to get you started</div>
           <div className="my-4 flex border-b border-b-richblack-600 text-sm">
             <p
-              className={`px-4 py-2 ${
-                active === 1
+              className={`px-4 py-2 ${active === 1
                   ? "border-b border-b-yellow-25 text-yellow-25"
                   : "text-richblack-50"
-              } cursor-pointer`}
+                } cursor-pointer`}
               onClick={() => setActive(1)}
             >
               Most Populer
             </p>
             <p
-              className={`px-4 py-2 ${
-                active === 2
+              className={`px-4 py-2 ${active === 2
                   ? "border-b border-b-yellow-25 text-yellow-25"
                   : "text-richblack-50"
-              } cursor-pointer`}
+                } cursor-pointer`}
               onClick={() => setActive(2)}
             >
               New
@@ -121,7 +119,7 @@ export default function Catalog() {
         <div className=" mx-auto box-content w-full max-w-maxContentTab md:px-4 py-12 lg:max-w-maxContent">
           <p className="section_heading">Frequently Bought</p>
           <div className="py-8">
-            <div className="grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 max-lg:grid-cols-3 max-xl:grid-cols-4 max-2xl:grid-cols-5 2xl:grid-cols-6 justify-start gap-6  ">
+            <div className="grid max-[450px]:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-3 max-xl:grid-cols-4 xl:grid-cols-5 justify-start gap-6  ">
               {categoryPageData?.data?.mostSellingCourses
                 ?.slice(0, 4)
                 .map((course, index) => (
