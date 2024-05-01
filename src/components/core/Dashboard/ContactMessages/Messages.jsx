@@ -32,7 +32,7 @@ export function Messages() {
             })
     }
     return (
-        <div className=' w-full lg:w-[900px] sm:px-10  '>
+        <div className=' w-full lg:w-[900px] md::px-10  '>
             <h1 className="mt-5 text-3xl font-medium text-richblack-5">All Messages</h1>
             <div className='w-full my-12 sm:px-6 md:px-8 lg:px-10 flex flex-col gap-14 '>
                 {
@@ -45,10 +45,13 @@ export function Messages() {
                             <div key={index} className='bg-richblack-800 p-5 rounded-xl border border-richblack-500 flex flex-col gap-5'>
                                 <div className='text-richblack-200 flex justify-between '>
                                     <div className='text-md font-semibold'>
-                                        <p>{message.name}</p>
-                                        <p>{message.email}</p>
+                                        <p>{message.firstName} {message.lastName}</p>
+                                        <p>{message.email.length > 27 ?
+                                            message.email.slice(0, 27) + "..." :
+                                            message.email}
+                                        </p>
                                     </div>
-                                    <div className='transition-all duration-1000'>
+                                    <div className='transition-all duration-1000 hidden sm:block'>
                                         <IconButton
                                             text="pending"
                                             customClasses='hover:scale-90  hover:text-richblack-500'
@@ -60,6 +63,14 @@ export function Messages() {
                                 <p className='text-richblack-100'>
                                     {message.message.length > 40 ? message.message.slice(0, 40) + '...' : message.message}
                                 </p>
+                                <div className='transition-all duration-1000 sm:hidden'>
+                                    <IconButton
+                                        text="pending"
+                                        customClasses='hover:scale-90  hover:text-richblack-500'
+                                        onClick={() => solveMessage(message)}
+                                        children={<MdOutlinePendingActions />}
+                                    />
+                                </div>
                             </div>
                         ))
                 }
