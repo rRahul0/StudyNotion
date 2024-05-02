@@ -55,7 +55,7 @@ function Navbar() {
 
         {/* login/signup/dashboard/ cart*/}
         <div className="hidden md:flex items-center gap-x-4 ">
-          {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+          {user && user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
               {totalItems > 0 && (
