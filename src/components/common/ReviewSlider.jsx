@@ -14,7 +14,7 @@ import { ratingsEndpoints } from "../../services/apis";
 
 const ReviewSlider = ({ courseId }) => {
   const [reviews, setReviews] = useState([]);
-  const truncateWords = 35;
+  const truncateWords = 20;
 
   useEffect(() => {
     (async () => {
@@ -30,7 +30,7 @@ const ReviewSlider = ({ courseId }) => {
 
   return (
     <div className="text-richblack-50 ">
-      <div className="my-[50px] h-[184px] sm:w-11/12 lg:max-w-maxContent  ">
+      <div className="my-[50px] h-[200px]  lg:max-w-maxContent  ">
         <Swiper
           slidesPerView={6}
           breakpoints={{
@@ -64,15 +64,15 @@ const ReviewSlider = ({ courseId }) => {
             <SwiperSlide key={i} className="rounded-lg">
               <div className="flex flex-col items-center gap-3 p-3 text-[14px] text-richblack-25">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14">
+                  <div className="w-14 h-14  aspect-square">
                     <img
                       src={
                         review?.user?.image
                           ? review?.user?.image
                           : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                       }
-                   
-                      alt=""
+                      
+                      alt="img"
                       className=" rounded-full object-cover"
                     />
                   </div>
