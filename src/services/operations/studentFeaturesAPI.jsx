@@ -8,8 +8,6 @@ const { COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API } 
 import rzpLogo from '../../assets/Logo/rzp_logo.png'
 import { setPaymentLoading } from '../../slices/courseSlice'
 import { removeFromCart } from "../../slices/cartSlice";
-import { useDispatch } from 'react-redux'
-import { localStorageDelete } from "../localStorageDelete"
 
 
 

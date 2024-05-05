@@ -3,7 +3,7 @@ import { localStorageDelete } from '../services/localStorageDelete';
 const initialState = {
     signupData: null,
     loading: false,
-    token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")):null,
+    token: localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")).token:null,
 }
 const authSlice = createSlice({
     name: 'auth',

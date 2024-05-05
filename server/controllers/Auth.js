@@ -223,8 +223,7 @@ exports.login = async (req, res) => {
       isExistUser.password = undefined;
 
       const options = {
-        // expiresIn: new Date(Date.now() + 60 * 1000),
-        // maxAge: 60*1000,
+        maxAge: '7d',
         httpOnly: true,
         secure: true,
         sameSite: "none",

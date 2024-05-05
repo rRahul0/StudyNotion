@@ -1,9 +1,6 @@
 import { toast } from "react-hot-toast"
-import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
 import { apiConnector } from "../apiConnector"
 import { profileEndpoints } from "../apis"
-import { localStorageDelete } from "../localStorageDelete"
 
 
 const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints;
