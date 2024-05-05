@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar/Navbar";
@@ -16,20 +17,15 @@ import Settings from "./components/core/Dashboard/Settings/Settings";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Contact from "./pages/Contact";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import MyCourse from "./components/core/Dashboard/InstructorCourse/MyCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
-import { useEffect } from "react";
-import { apiConnector } from "./services/apiConnector";
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-import { setToken } from "./slices/authSlice";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
-import VideoDetailsSidebar from "./components/core/ViewCourse/VideoDetailsSidebar";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
 import {Category} from "./components/core/Dashboard/AddCategory/Category";
 import {Categories} from "./components/core/Dashboard/AllCategory/index";
@@ -38,9 +34,7 @@ import SingleMessage from "./components/core/Dashboard/ContactMessages/SingleMes
 import Admin from "./components/core/Dashboard/Admin/Admin";
 
 function App() {
-  const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.profile);  
  
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter border">
@@ -147,6 +141,7 @@ function App() {
             </>
           )}
         </Route>
+
         <Route
           element={
             <PrivateRoute>
@@ -161,6 +156,7 @@ function App() {
             />
           )}
         </Route>
+
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
