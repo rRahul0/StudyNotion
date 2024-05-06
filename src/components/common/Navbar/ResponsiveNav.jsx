@@ -24,7 +24,7 @@ export default function ResponsiveNav({ loading, subLinks }) {
   return (
     <div className="md:hidden relative flex gap-5 items-center">
       <div className="md:hidden flex items-center gap-x-4 ">
-          {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+          {user && user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
               {totalItems > 0 && (
