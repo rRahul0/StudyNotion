@@ -167,7 +167,7 @@ export default function CourseDetails() {
               />
             </div>
             <div
-              className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
+              className={`z-20 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
             >
               <div>
                 <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
