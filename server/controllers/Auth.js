@@ -216,7 +216,7 @@ exports.login = async (req, res) => {
         accountType: isExistUser.accountType,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        expiresIn: "7d",
       });
 
       isExistUser.token = token;
