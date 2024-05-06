@@ -36,12 +36,11 @@ function Navbar() {
   }, []);
 
   return (
+    <div className="relative">
     <div
-      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${
-        location.pathname !== "/" ? "bg-richblack-800" : ""
-      } transition-all duration-200 relative`}
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 bg-richblack-900 transition-all duration-200 fixed top-0 w-full z-30`}
     >
-      <div className="w-11/12 md:w-9/12 max-w-maxContent mx-auto flex justify-between items-center  ">
+      <div className="w-11/12 md:w-9/12 max-w-maxContent mx-auto flex justify-between items-center ">
         <Link to="/">
           <img src={logo} width={160} height={42} />
         </Link>
@@ -91,6 +90,7 @@ function Navbar() {
       </div>
 
       
+    </div>
     </div>
   );
 }
