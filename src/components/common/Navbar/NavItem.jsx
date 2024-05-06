@@ -24,8 +24,7 @@ export default function NavItem({loading, subLinks, customClass1, customClass2, 
                   >
                     <p >{link.title}</p>
                     <IoIosArrowDropdownCircle />
-                    <div className="invisible absolute box-border flex flex-col rounded-xl bg-richblack-5 p-4 text-richblack-600 opacity-0 transition-all duration-500 group-hover:visible group-hover:opacity-100 w-[130px] sm:w-[175px] left-[10%] translate-x-[-50%] translate-y-[25%] top-[50%] z-20 ">
-                      {/* <div className='h-6 w-6 rotate-45 bg-richblack-50 absolute left-[65%] top-0 translate-x-[85%] translate-y-[-25%] '></div> */}
+                    <div className="invisible absolute box-border flex flex-col rounded-xl bg-richblack-5 p-4 text-richblack-600 opacity-0 transition-all duration-500 group-hover:visible group-hover:opacity-100 w-[130px] sm:w-[175px] -left-[120%]  sm:left-[10%] translate-x-[-50%] translate-y-[25%] -top-[200%] sm:top-[50%] z-20 ">
 
                       {loading ? (
                         <p className="text-center">Loading...</p>
