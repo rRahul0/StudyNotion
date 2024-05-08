@@ -36,7 +36,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative mb-14">
     <div
       className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 bg-richblack-900 transition-all duration-200 fixed top-0 w-full z-30`}
     >
