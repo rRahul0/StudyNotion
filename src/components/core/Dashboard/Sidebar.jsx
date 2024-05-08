@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { sidebarLinks } from "../../../data/dashboard-links";
 import { logout } from "../../../services/operations/authAPI";
 import { setOpen } from "../../../slices/profileSlice";
@@ -9,11 +9,9 @@ import { VscSignOut } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import SidebarLink from "../Dashboard/SidebarLink";
 import { FaLessThan } from "react-icons/fa";
-import useOnClickOutside from "../../../hooks/useOnClickOutside";
-import { set } from "react-hook-form";
+
 
 export default function Sidebar() {
-  const { loading: authLoading } = useSelector((state) => state.auth);
   const {
     loading: profileLoading,
     user,
@@ -21,9 +19,7 @@ export default function Sidebar() {
   } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const ref = useRef(null);
   const [confirmationModel, setConfirmationModel] = useState(null);
-  useOnClickOutside(ref, () => dispatch(setOpen(true)));
 
   return (
     <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc(100vh-3.6rem)] bg-richblack-800 pt-5 pb-10 absolute z-10 md:relative ">

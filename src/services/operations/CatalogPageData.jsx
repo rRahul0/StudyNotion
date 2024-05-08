@@ -29,7 +29,7 @@ export const getCatalogPageData = async (categoryId) => {
 
 
 export const getAverageRating = async (courseId) => {
-  const toastId = toast.loading("Loading...");
+  // const toastId = toast.loading("Loading...");
   let result;
 
   try {
@@ -46,6 +46,6 @@ export const getAverageRating = async (courseId) => {
     console.log(error.message);
     result = error.response?.data;
   }
-  toast.dismiss(toastId);
+  // toast.dismiss(toastId);
   return result;
 }

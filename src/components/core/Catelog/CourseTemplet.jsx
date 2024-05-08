@@ -17,7 +17,7 @@ export default function CourseTemplet({ course, Height }) {
   }, [course]);
   
   return (
-    <div className="w-full flex justify-start md:justify-center ">
+    <div className="w-full flex justify-start  md:justify-center">
       <Link to={`/courses/${course._id}`}>
         <div>
           <div className="rounded-lg">
@@ -27,7 +27,7 @@ export default function CourseTemplet({ course, Height }) {
               className={`${Height} w-full rounded-xl object-cover `}
             />
 
-            <div className="flex flex-col gap-2 px-1 py-3">
+            <div className="flex flex-col gap-2 px-1 py-3 items-start">
               <p className="text-xl text-richblack-5">{course?.courseName}</p>
               <p className="text-sm text-richblack-50">
                 {course?.instructor?.firstName} {course?.instructor?.lastName}

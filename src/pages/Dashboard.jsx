@@ -23,12 +23,12 @@ export default function Dashboard() {
 
   return (
     <div className="flex relative  ">
-      <div className="relative  md:relative flex " ref={ref}>
+      <div className="relative  md:relative flex " >
         <div className="hidden md:block transition-all duration-1000">
           <Sidebar />
         </div>
 
-        <div className="md:hidden">{open && <Sidebar />}</div>
+        <div className="md:hidden" ref={ref}>{open && <Sidebar />}</div>
 
       </div>
 
