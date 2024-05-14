@@ -47,8 +47,9 @@ export default function EnrolledCourses() {
         }}
         >
           <div className="flex rounded-t-lg bg-richblack-500 ">
-            <p className="w-[45%] px-5 py-3">Video</p>
+          <p className="w-[45%] px-5 py-3">Course Name</p>
             <p className="w-1/4 px-2 py-3">Duration</p>
+            <p className="flex-1 px-2 py-3">Progress</p>
           </div>
 
 
@@ -62,13 +63,21 @@ export default function EnrolledCourses() {
             >
               
               <div
-                className="flex flex-col items-center sm:justify-start sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
+                className="flex flex-col items-start sm:justify-start sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
               >
                 <img
                   src={course.thumbnail}
                   alt="courseImage"
                   className="h-14 w-14 rounded-lg object-cover"
                 />
+                <div className="flex max-w-xs flex-col gap-2">
+                  <p className="font-semibold">{course.courseName}</p>
+                  <p className="text-xs text-richblack-300">
+                    {course.courseDescription.length > 50
+                      ? `${course.courseDescription.slice(0, 50)}...`
+                      : course.courseDescription}
+                  </p>
+                </div>
               </div>
 
               <div className="w-1/4 px-2 py-3">{course?.totalDuration}</div>
