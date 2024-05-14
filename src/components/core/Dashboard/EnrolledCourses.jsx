@@ -28,8 +28,7 @@ export default function EnrolledCourses() {
 
   return (
     <>
-    
-      <div className="text-3xl text-richblack-50">Enrolled Courses</div>
+      <div className="text-3xl text-richblack-50">Your Uploads</div>
       {!enrolledCourses ? (
         <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
           <Loader />
@@ -39,11 +38,17 @@ export default function EnrolledCourses() {
           You haven,t enrolled in any course yet
         </p>
       ) : (
-        <div className="my-8 text-richblack-5">
+        <div className="my-8 text-richblack-5"
+        onClick={() => {
+          // console.log(course, "course EnrolledCourses 58");
+          navigate(
+            `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/subSection/${course.courseContent?.[0]?.subSections?.[0]?._id}`
+          );
+        }}
+        >
           <div className="flex rounded-t-lg bg-richblack-500 ">
-            <p className="w-[45%] px-5 py-3">Course Name</p>
-            <p className="w-1/4 px-2 py-3">Durations</p>
-            <p className="flex-1 px-2 py-3">Progress</p>
+            <p className="w-[45%] px-5 py-3">Video</p>
+            <p className="w-1/4 px-2 py-3">Duration</p>
           </div>
 
 
@@ -58,26 +63,12 @@ export default function EnrolledCourses() {
               
               <div
                 className="flex flex-col items-center sm:justify-start sm:flex-row w-[45%] cursor-pointer  gap-4 px-5 py-3 "
-                onClick={() => {
-                  // console.log(course, "course EnrolledCourses 58");
-                  navigate(
-                    `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/subSection/${course.courseContent?.[0]?.subSections?.[0]?._id}`
-                  );
-                }}
               >
                 <img
                   src={course.thumbnail}
                   alt="courseImage"
                   className="h-14 w-14 rounded-lg object-cover"
                 />
-                <div className="flex max-w-xs flex-col gap-2">
-                  <p className="font-semibold">{course.courseName}</p>
-                  <p className="text-xs text-richblack-300">
-                    {course.courseDescription.length > 15
-                      ? `${course.courseDescription.slice(0, 15)}...`
-                      : course.courseDescription}
-                  </p>
-                </div>
               </div>
 
               <div className="w-1/4 px-2 py-3">{course?.totalDuration}</div>

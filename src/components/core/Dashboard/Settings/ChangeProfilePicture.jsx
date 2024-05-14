@@ -62,7 +62,6 @@ export default function ChangeProfilePicture() {
       <div className="flex flex-col md:flex-row items-center gap-4 ">
         <img 
         src={previewSource?previewSource : user?.image}
-        {...console.log("user image", user?.image)}
         alt={`profile-${user?.firstName}`} 
         className="aspect-square w-[78px] rounded-full object-cover border-2 border-richblack-200" />
 
