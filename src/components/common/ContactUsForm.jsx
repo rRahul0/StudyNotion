@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import CountryCode from '../../data/countrycode.json';
 import { apiConnector } from '../../services/apiConnector';
 import { contactusEndpoint } from '../../services/apis';
@@ -9,7 +8,6 @@ import { toast } from 'react-hot-toast';
 
 export default function ContactUsForm() {
     const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
