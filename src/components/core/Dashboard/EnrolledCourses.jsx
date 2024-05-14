@@ -39,12 +39,7 @@ export default function EnrolledCourses() {
         </p>
       ) : (
         <div className="my-8 text-richblack-5"
-        onClick={() => {
-          // console.log(course, "course EnrolledCourses 58");
-          navigate(
-            `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/subSection/${course.courseContent?.[0]?.subSections?.[0]?._id}`
-          );
-        }}
+        
         >
           <div className="flex rounded-t-lg bg-richblack-500 ">
           <p className="w-[45%] px-5 py-3">Course Name</p>
@@ -60,6 +55,12 @@ export default function EnrolledCourses() {
               className={`flex items-center  border border-richblack-700 
               ${ index === arr.length - 1 ? "rounded-b-lg" : "rounded-none" }`}
               key={index}
+              onClick={() => {
+                // console.log(course, "course EnrolledCourses 58");
+                navigate(
+                  `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/subSection/${course.courseContent?.[0]?.subSections?.[0]?._id}`
+                );
+              }}
             >
               
               <div
