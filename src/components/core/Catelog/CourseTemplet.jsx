@@ -11,7 +11,7 @@ export default function CourseTemplet({ course, Height }) {
   useEffect(() => {
     (async function AvgRating() {
       const response = await getAverageRating(course?._id);
-      setAvgRatingCount(response.averageRating);
+      setAvgRatingCount(response.averageRating.toFixed(1));
     })();
     
   }, [course]);
@@ -34,8 +34,8 @@ export default function CourseTemplet({ course, Height }) {
               </p>
 
               <div className="flex items-center gap-2">
-                <span className="text-yellow-5">{avgRatingCount || 0}</span>
-                <RatingStars Review_Count={avgRatingCount} />
+                <span className="text-yellow-5">{avgRatingCount!=0?avgRatingCount:0}</span>
+                <RatingStars Review_Count={avgRatingCount!=0?avgRatingCount:0} />
                 <span className="text-richblack-400">{course?.ratingAndreviews?.length} Ratings</span>
               </div>
 
