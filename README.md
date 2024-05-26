@@ -134,9 +134,7 @@ To contribute:
 
 ## Contact
 
-Rahul - 
-
-[LinkedIn ](https://www.linkedin.com/in/rahul-karmakar-605509257/)
+Rahul - [LinkedIn ](https://www.linkedin.com/in/rahul-karmakar-605509257/)
 [| Email](karmakarrahul503@gmail.com)
 
 
