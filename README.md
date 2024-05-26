@@ -63,29 +63,29 @@ To run this project, you will need to add the following environment variables to
 
 `JWT_SECRET`
 
-    Mail Environment Variables :
+Mail Environment Variables :
 
 `MAIL_HOST`
 `MAIL_USER`
 `MAIL_PASS`
 
 
-    Cludinary Environment Variables
+Cludinary Environment Variables
 
 `FOLDER_NAME`
 `CLOUD_NAME` 
 `API_KEY` 
 `API_SECRET` 
 
-    Cludinary Environment Variables:
+Cludinary Environment Variables:
 
 `RAZORPAY_KEY` 
 `RAZORPAY_SECRET`
 
-    Admin Register Key:
+Admin Register Key:
 
 `ADMIN_KEY`=your_secret_key
-    ```
+
 
 
 ### Frontend Environment Variables
