@@ -134,8 +134,8 @@ To contribute:
 
 ## Contact
 
-Rahul - [LinkedIn ](https://www.linkedin.com/in/rahul-karmakar-605509257/)
-[| Email](karmakarrahul503@gmail.com)
+Rahul - [https://www.linkedin.com/in/rahul-karmakar-605509257/](https://www.linkedin.com/in/rahul-karmakar-605509257/)
 
+Email : `karmakarrahul503@gmail.com`
 
 Project Link: [https://github.com/rRahul0/StudyNotion](https://github.com/rRahul0/StudyNotion)
