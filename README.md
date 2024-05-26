@@ -15,7 +15,7 @@ Welcome to StudyNotion, an educational platform designed to facilitate learning 
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [Contributing](#Contributing)
-- [Authors](#Author)
+- [Authors](#Authors)
 - [Contact](#Contact)
 ## Features
 
@@ -129,7 +129,7 @@ To contribute:
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Author
+## Authors
 - [Rahul Karmakar](https://github.com/rRahul0)
 
 ## Contact
