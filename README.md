@@ -15,7 +15,7 @@ Welcome to StudyNotion, an educational platform designed to facilitate learning 
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [Contributing](#Contributing)
-- [Authors](## Authors)
+- [Authors](#Authors)
 - [Contact](#Contact)
 ## Features
 
