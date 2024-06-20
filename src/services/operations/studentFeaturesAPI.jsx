@@ -1,4 +1,3 @@
-const RAZORPAY_SECRET = import.meta.env.VITE_RAZORPAY_SECRET
 const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY
 
 import { studentEndpoints } from '../apis'

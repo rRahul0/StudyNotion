@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from "react-redux"
 import { Navigate, useLocation } from "react-router-dom"
 import { setToken } from "../../../slices/authSlice"
 import { useDispatch } from "react-redux"
 import toast from 'react-hot-toast'
+import { setUser } from '../../../slices/profileSlice'
 
 
 
@@ -16,6 +17,7 @@ export default function PrivateRoute({ children }) {
     if (expiry<Date.now()){ 
       toast.error("Session Expired")
       dispatch(setToken(null));
+      dispatch(setUser(null));
     }
   }, [location]);
 

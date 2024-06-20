@@ -2,7 +2,6 @@ import { toast } from "react-hot-toast"
 
 // import { updateCompletedLectures } from "../../slices/viewCourseSlice"
 // import { setLoading } from "../../slices/profileSlice";
-import { localStorageDelete } from "../localStorageDelete"
 import { apiConnector } from "../apiConnector"
 import { courseEndpoints } from "../apis"
 
@@ -408,7 +407,6 @@ export const markLectureAsComplete = async (data, token) => {
 export const createRating = async (data, token) => {
   const toastId = toast.loading("Loading...")
   let success = false
-  let message = "";
   try {
     const response = await apiConnector("POST", CREATE_RATING_API, data, {
       Authorization: `Bearer ${token}`,

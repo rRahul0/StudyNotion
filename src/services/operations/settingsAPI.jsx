@@ -1,11 +1,8 @@
-import React from 'react'
 import { apiConnector } from '../apiConnector';
 import { settingsEndpoints } from '../apis'
 import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
 import { setUser } from "../../slices/profileSlice"
 import { logout } from './authAPI';
-import { localStorageDelete } from "../localStorageDelete"
 
 
 const {
