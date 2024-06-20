@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-hot-toast';
 
 const initialState = {
     loading: false,

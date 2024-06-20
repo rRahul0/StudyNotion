@@ -1,8 +1,7 @@
 import { categories } from "../apis"
 import { apiConnector } from "../apiConnector"
 import { toast } from "react-hot-toast"
-import { setLoading } from "../../slices/authSlice"
-import { endpoints } from "../apis"
+
 
 
 const { CREATE_CATEGORY_API, DELETE_CATEGORY_API, UPDATE_CATEGORY_API } = categories
