@@ -104,6 +104,10 @@ Admin Register Key:
     ```bash
     npm run dev
     ```
+    ```bash
+    cd server
+    npm run dev
+    ```
 
     The application will be available at `http://localhost:5173`.
     ## Usage
