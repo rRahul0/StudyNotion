@@ -29,7 +29,7 @@ export default function ForgotPassword() {
                                 {!emailSent ? "Reset your Password" : "Check your Email"}
                             </h1>
                             <p className='text-richblack-200'>
-                                {!emailSent ? "Have no fear. We’ll email you instructions to reset your password. If you dont have access to your email we can try account recovery" : `We have sent the reset email to ${<div>{email}</div>}`}
+                                {!emailSent ? "Have no fear. We’ll email you instructions to reset your password. If you dont have access to your email we can try account recovery" : `We have sent the reset email to ${{email}}`}
                             </p>
                             <form onSubmit={handleOnSubmit}>
                                 {
