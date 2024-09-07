@@ -5,7 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../../services/operations/authAPI";
 
-function LoginForm({admin}) {
+const guestStudentEmail = import.meta.env.VITE_GUEST_STUDENT_EMAIL;
+const guestInstructorEmail = import.meta.env.VITE_GUEST_INSTRUCTOR_EMAIL;
+const guestStudentPassword = import.meta.env.VITE_GUEST_STUDENT_PASSWORD;
+const guestInstructorPassword = import.meta.env.VITE_GUEST_INSTRUCTOR_PASSWORD;
+
+
+function LoginForm({ admin }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -26,7 +32,7 @@ function LoginForm({admin}) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(email, password, navigate)) 
+    dispatch(login(email, password, navigate))
   }
 
   return (
@@ -92,6 +98,18 @@ function LoginForm({admin}) {
       >
         Sign In
       </button>
+      <div className="w-full flex justify-between ">
+        <button 
+        onClick={()=> dispatch(login(guestStudentEmail, guestStudentPassword, navigate)) }
+        className="w-2/5 py-2 px-2 bg-yellow-100 rounded-full">
+          Guest Student
+        </button>
+        <button 
+        onClick={()=> dispatch(login(guestInstructorEmail, guestInstructorPassword, navigate)) }
+        className="w-2/5 py-2 px-2 bg-yellow-100 rounded-full">
+          Guest Instructor
+        </button>
+      </div>
     </form>
   )
 }
