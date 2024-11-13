@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "build": "vite build"
+    "deploy": "serverless deploy"
   },
   "keywords": [],
   "author": "",
@@ -16,12 +16,12 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.1",
-    "cookie": "^0.6.0",
+    "cookie": "^1.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "express": "^4.21.1",
     "express-fileupload": "^1.4.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
@@ -30,7 +30,6 @@
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2",
     "otp-generator": "^4.0.1",
-    "razorpay": "^2.9.2",
-    "server": "file:"
+    "razorpay": "^2.9.2"
   }
 }
