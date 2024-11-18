@@ -1,4 +1,5 @@
 const express = require('express')
+const serverless = require("serverless-http")
 const dbConnect = require('./config/database')
 const userRoutes = require("./routes/User")
 const courseRoutes = require("./routes/Course")
@@ -10,8 +11,14 @@ const { cloudinaryConnect } = require("./config/cloudinary")
 const fileupload = require('express-fileupload')
 require('dotenv').config()
 
+// server
 const app = express()
+
 const PORT = process.env.PORT || 8000
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    process.env.FRONTEND_URL2
+]
 
 //database connect
 dbConnect()
@@ -19,13 +26,18 @@ dbConnect()
 //middewares
 app.use(express.json())
 app.use(cookieParser())
-app.use(express.urlencoded({ extended: true}))
-app.use(
-    cors({
-        origin: `${process.env.FRONTEND_URL}`,
-		credentials: true,
-    })
-)
+app.use(express.urlencoded({ extended: true }))
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+}));
 
 app.use(
     fileupload({
@@ -53,3 +65,5 @@ app.get("/", (req, res) => {
     })
 })
 app.listen(PORT, () => console.log(`backend running at port${PORT}`))
+
+module.exports.handler = serverless(app);

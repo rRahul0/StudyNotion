@@ -1,0 +1,84 @@
+name: Deploy StudyNotion Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./server
+
+      # Step 4: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      # Step 5: Set up Serverless Framework
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+
+      # Step 6: Deploy to AWS with Serverless Access Key directly in environment variable
+      - name: Deploy Service
+        run: |
+          export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
+          export PORT=${{ secrets.PORT }}
+          export DATABASE_URI=${{ secrets.DATABASE_URI }}
+          export FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+          export FRONTEND_URL2=${{ secrets.FRONTEND_URL2 }}
+          export MAIL_HOST=${{ secrets.MAIL_HOST }}
+          export MAIL_USER=${{ secrets.MAIL_USER }}
+          export MAIL_PASS=${{ secrets.MAIL_PASS }}
+          export JWT_SECRET=${{ secrets.JWT_SECRET }}
+          export FOLDER_NAME=${{ secrets.FOLDER_NAME }}
+          export CLOUD_NAME=${{ secrets.CLOUD_NAME }}
+          export API_KEY=${{ secrets.API_KEY }}
+          export API_SECRET=${{ secrets.API_SECRET }}
+          export RAZORPAY_KEY=${{ secrets.RAZORPAY_KEY }}
+          export RAZORPAY_SECRET=${{ secrets.RAZORPAY_SECRET }}
+          export ADMIN_KEY=${{ secrets.ADMIN_KEY }}
+          sls deploy --stage production
+        working-directory: ./server
+
+      # Step 7: Verify Deployment
+      - name: Verify Deployment
+        run: |
+          export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
+          export PORT=${{ secrets.PORT }}
+          export DATABASE_URI=${{ secrets.DATABASE_URI }}
+          export FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+          export FRONTEND_URL2=${{ secrets.FRONTEND_URL2 }}
+          export MAIL_HOST=${{ secrets.MAIL_HOST }}
+          export MAIL_USER=${{ secrets.MAIL_USER }}
+          export MAIL_PASS=${{ secrets.MAIL_PASS }}
+          export JWT_SECRET=${{ secrets.JWT_SECRET }}
+          export FOLDER_NAME=${{ secrets.FOLDER_NAME }}
+          export CLOUD_NAME=${{ secrets.CLOUD_NAME }}
+          export API_KEY=${{ secrets.API_KEY }}
+          export API_SECRET=${{ secrets.API_SECRET }}
+          export RAZORPAY_KEY=${{ secrets.RAZORPAY_KEY }}
+          export RAZORPAY_SECRET=${{ secrets.RAZORPAY_SECRET }}
+          export ADMIN_KEY=${{ secrets.ADMIN_KEY }}
+          sls info --stage production
+        working-directory: ./server
