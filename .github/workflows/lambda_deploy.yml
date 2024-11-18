@@ -11,6 +11,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+      PORT: ${{ secrets.PORT }}
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      FRONTEND_URL2: ${{ secrets.FRONTEND_URL2 }}
+      MAIL_HOST: ${{ secrets.MAIL_HOST }}
+      MAIL_USER: ${{ secrets.MAIL_USER }}
+      MAIL_PASS: ${{ secrets.MAIL_PASS }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      FOLDER_NAME: ${{ secrets.FOLDER_NAME }}
+      CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+      API_KEY: ${{ secrets.API_KEY }}
+      API_SECRET: ${{ secrets.API_SECRET }}
+      RAZORPAY_KEY: ${{ secrets.RAZORPAY_KEY }}
+      RAZORPAY_SECRET: ${{ secrets.RAZORPAY_SECRET }}
+      ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
@@ -39,46 +57,12 @@ jobs:
       - name: Install Serverless Framework
         run: npm install -g serverless
 
-      # Step 6: Deploy to AWS with Serverless Access Key directly in environment variable
+      # Step 6: Deploy to AWS
       - name: Deploy Service
-        run: |
-          export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
-          export PORT=${{ secrets.PORT }}
-          export DATABASE_URI=${{ secrets.DATABASE_URI }}
-          export FRONTEND_URL=${{ secrets.FRONTEND_URL }}
-          export FRONTEND_URL2=${{ secrets.FRONTEND_URL2 }}
-          export MAIL_HOST=${{ secrets.MAIL_HOST }}
-          export MAIL_USER=${{ secrets.MAIL_USER }}
-          export MAIL_PASS=${{ secrets.MAIL_PASS }}
-          export JWT_SECRET=${{ secrets.JWT_SECRET }}
-          export FOLDER_NAME=${{ secrets.FOLDER_NAME }}
-          export CLOUD_NAME=${{ secrets.CLOUD_NAME }}
-          export API_KEY=${{ secrets.API_KEY }}
-          export API_SECRET=${{ secrets.API_SECRET }}
-          export RAZORPAY_KEY=${{ secrets.RAZORPAY_KEY }}
-          export RAZORPAY_SECRET=${{ secrets.RAZORPAY_SECRET }}
-          export ADMIN_KEY=${{ secrets.ADMIN_KEY }}
-          sls deploy --stage production
+        run: sls deploy --stage production
         working-directory: ./server
 
       # Step 7: Verify Deployment
       - name: Verify Deployment
-        run: |
-          export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
-          export PORT=${{ secrets.PORT }}
-          export DATABASE_URI=${{ secrets.DATABASE_URI }}
-          export FRONTEND_URL=${{ secrets.FRONTEND_URL }}
-          export FRONTEND_URL2=${{ secrets.FRONTEND_URL2 }}
-          export MAIL_HOST=${{ secrets.MAIL_HOST }}
-          export MAIL_USER=${{ secrets.MAIL_USER }}
-          export MAIL_PASS=${{ secrets.MAIL_PASS }}
-          export JWT_SECRET=${{ secrets.JWT_SECRET }}
-          export FOLDER_NAME=${{ secrets.FOLDER_NAME }}
-          export CLOUD_NAME=${{ secrets.CLOUD_NAME }}
-          export API_KEY=${{ secrets.API_KEY }}
-          export API_SECRET=${{ secrets.API_SECRET }}
-          export RAZORPAY_KEY=${{ secrets.RAZORPAY_KEY }}
-          export RAZORPAY_SECRET=${{ secrets.RAZORPAY_SECRET }}
-          export ADMIN_KEY=${{ secrets.ADMIN_KEY }}
-          sls info --stage production
+        run: sls info --stage production
         working-directory: ./server
