@@ -4,11 +4,13 @@ const Course = require("../models/Course");
 const Category = require("../models/Category");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const Profile = require("../models/Profile");
 const { mailSender } = require("../utilis/mailSender");
 const { passwordUpdated } = require("../mail/template/passwordUpdate");
+const jwtUtil = require("../config/jwtConfig");
+
 require("dotenv").config();
+
 
 // send otp
 exports.sendOTP = async (req, res) => {
@@ -63,6 +65,7 @@ exports.sendOTP = async (req, res) => {
   }
 };
 
+
 //signup
 exports.signUp = async (req, res) => {
   try {
@@ -103,13 +106,13 @@ exports.signUp = async (req, res) => {
       });
     }
 
-    if(accountType==="admin" && !secretKey){
+    if (accountType === "admin" && !secretKey) {
       return res.status(400).json({
         success: false,
         message: "Secret Key not found",
       });
     }
-    if(secretKey && secretKey !==process.env.ADMIN_KEY){
+    if (secretKey && secretKey !== process.env.ADMIN_KEY) {
       return res.status(400).json({
         success: false,
         message: "Secret Key not matched",
@@ -188,6 +191,7 @@ exports.signUp = async (req, res) => {
   }
 };
 
+
 //login
 exports.login = async (req, res) => {
   try {
@@ -210,16 +214,19 @@ exports.login = async (req, res) => {
 
     //password matching
     if (await bcrypt.compare(password, isExistUser.password)) {
+
       const payload = {
         id: isExistUser._id,
         email: isExistUser.email,
         accountType: isExistUser.accountType,
       };
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
 
-      isExistUser.token = token;
+      const { accessToken, refreshToken } = jwtUtil.generateTokens(payload);
+
+      isExistUser.refreshToken = refreshToken;
+      await isExistUser.save();
+
+      isExistUser.token = accessToken;
       isExistUser.password = undefined;
 
       const options = {
@@ -229,11 +236,11 @@ exports.login = async (req, res) => {
         sameSite: "none",
       };
 
-      return res.cookie("token", token, options).status(200).json({
+      return res.cookie("token", accessToken, options).status(200).json({
         success: true,
-        token,
+        token: accessToken,
         user: isExistUser,
-        message: "Loggedin sucessfully",  
+        message: "Loggedin sucessfully",
       });
     } else {
       return res.status(400).json({
@@ -249,6 +256,92 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+//relogin
+exports.reLogin = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    if (!userId) {
+      return res.status(404).json({
+        success: false,
+        message: "userId not found",
+      });
+    }
+
+    let existingUser = await User.findById(userId);
+    if (!existingUser.refreshToken) {
+      throw new Error("Refresh token not found");
+    }
+    try {
+      const decode = jwtUtil.verifyRefreshToken(existingUser.refreshToken)
+      req.user = decode
+    } catch (error) {
+      return res.status(401).json({ sucess: false, message: error.message, })
+    }
+    const payload = {
+      id: isExistUser._id,
+      email: isExistUser.email,
+      accountType: isExistUser.accountType,
+    };
+    const { accessToken, refreshToken } = jwtUtil.generateTokens(payload);
+
+    existingUser.refreshToken = refreshToken;
+    await existingUser.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "User found",
+      token: accessToken,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "User not found",
+      hint: error.message,
+    });
+  }
+}
+
+
+//logout
+exports.logout = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!userId) {
+      return res.status(404).json({
+        success: false,
+        message: "userId not found",
+      });
+    }
+    let existing = await User.findById(userId); //req.user.id
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    existing.refreshToken = null;
+    await existing.save();
+
+    return res.cookie("token", "", {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    }).status(200).json({
+      success: true,
+      message: "Logout successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Logout failed",
+      hint: error.message,
+    });
+  }
+};
+
 
 //change password
 exports.changePassword = async (req, res) => {
@@ -312,13 +405,14 @@ exports.changePassword = async (req, res) => {
   }
 };
 
+
 exports.getAdminData = async (req, res) => {
   try {
     const instructor = await User.find({ accountType: "instructor" }).countDocuments();
     const students = await User.find({ accountType: "student" }).countDocuments();
     const categories = await Category.find({}).populate("courses");
-    const courses = await Course.find({status:"Published"});
-  
+    const courses = await Course.find({ status: "Published" });
+
     const cat = categories.map((category) => category.courses.filter((course) => course.status === 'Published')
     );
     const categoryData = categories.map((category) => {
@@ -331,7 +425,7 @@ exports.getAdminData = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data:{
+      data: {
         instructor,
         students,
         courses,

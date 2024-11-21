@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken')
-require("dotenv")
+const jwtUtil = require("../config/jwtConfig");
+require("dotenv").config();
+
 
 //Auth
 exports.auth = async (req, res, next) => {
@@ -14,9 +15,8 @@ exports.auth = async (req, res, next) => {
         }
 
         try {
-            const decode = jwt.verify(token, process.env.JWT_SECRET)
+            const decode = jwtUtil.verifyAccessToken(token);
             req.user = decode
-
         } catch (error) {
             return res.status(401).json({
                 sucess: false,
@@ -25,7 +25,6 @@ exports.auth = async (req, res, next) => {
         }
 
         next()
-
 
     } catch (error) {
         return res.status(500).json({

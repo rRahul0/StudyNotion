@@ -8,7 +8,9 @@ const {
     signUp,
     sendOTP,
     changePassword,
-    getAdminData
+    getAdminData,
+    reLogin,
+    logout
 } = require("../controllers/Auth")
 const {
     resetPasswordToken,
@@ -27,6 +29,12 @@ const {contactUsController, getAllMessages, deleteMessage} = require("../control
 
 // Route for user login
 router.post("/login", login)
+
+// Route for user logout
+router.get("/logout", auth, logout)
+
+// Route for re-login
+router.post("/refresh", reLogin)
 
 // Route for user signup
 router.post("/signup", signUp)

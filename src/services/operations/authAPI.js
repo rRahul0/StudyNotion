@@ -4,8 +4,8 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
-import { endpoints } from "../apis"
-import { contactusEndpoint } from "../apis"
+import { endpoints, contactusEndpoint } from "../apis"
+
 
 const {
   SENDOTP_API,
@@ -13,8 +13,8 @@ const {
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
+  LOGOUT_API
 } = endpoints
-
 
 
 export function sendOtp(email, navigate) {
@@ -104,7 +104,7 @@ export function login(email, password, navigate) {
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
       dispatch(setUser(response.data.user))
-      localStorage.setItem("data", JSON.stringify({ token: response.data.token, expire: Date.now() + 1000*60*60*24*7 }))
+      localStorage.setItem("token", response.data.token)
       localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
     } catch (error) {
@@ -174,15 +174,27 @@ export function resetPassword(password, confirmPassword, token, navigate) {
   }
 }
 
-export function logout(navigate) {
-  return (dispatch) => {
-    dispatch(setToken(null))
-    dispatch(setUser(null))
-    dispatch(resetCart())
-    localStorage.removeItem("token")
-    localStorage.removeItem("data")
-    toast.success("Logged Out")
-    navigate("/")
+export function logout(navigate, token) {
+  return async (dispatch) => {
+    try {
+      //clear cookies
+      const response = await apiConnector("GET", LOGOUT_API, null, { 'Authorization': `Bearer ${token}` })
+      console.log("LOGOUT API RESPONSE............", response)
+      if (!response.data.success) {
+        console.log(response)
+        // throw new Error(response.data.message)
+      }
+      dispatch(setToken(null))
+      dispatch(setUser(null))
+      dispatch(resetCart())
+      localStorage.clear()
+      toast.success("Logged Out")
+      navigate("/login")
+    } catch (error) {
+      alert(error)
+      console.log("LOGOUT API ERROR............", error)
+      toast.error("Failed To Logout")
+    }
   }
 }
 
@@ -192,7 +204,7 @@ export function logout(navigate) {
 // allcontactmsg
 export async function getAllMessages(token) {
   const toastId = toast.loading("Loading...")
-  let result=[];
+  let result = [];
   try {
     const response = await apiConnector("GET", contactusEndpoint.CONTACT_US_MESSAGES_API, null, {
       Authorization: `Bearer ${token}`,
@@ -203,7 +215,7 @@ export async function getAllMessages(token) {
       throw new Error(response.data.message)
     }
 
-    if(response.data.success)result = response.data.allMessages
+    if (response.data.success) result = response.data.allMessages
   } catch (error) {
     console.log("GET ALL MESSAGES API ERROR............", error)
     toast.error("Could Not Get Messages")
@@ -217,7 +229,7 @@ export async function deleteMessage(token, id) {
   const toastId = toast.loading("Loading...")
 
   try {
-    const response = await apiConnector("DELETE", contactusEndpoint.CONTACT_US_MESSAGE_API+`/${id}`, null, {
+    const response = await apiConnector("DELETE", contactusEndpoint.CONTACT_US_MESSAGE_API + `/${id}`, null, {
       Authorization: `Bearer ${token}`,
     })
     console.log(" DELETE MESSAGE ...........", response)
@@ -225,7 +237,7 @@ export async function deleteMessage(token, id) {
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
-    result  = response.data
+    result = response.data
 
     toast.success("Message Deleted Successfully")
   } catch (error) {
@@ -250,7 +262,7 @@ export async function getAdminData(token) {
       throw new Error(response.data.message)
     }
 
-    result=response.data.data
+    result = response.data.data
   } catch (error) {
     console.log("GET ALL MESSAGES API ERROR............", error)
     toast.error("Could Not Get Messages")

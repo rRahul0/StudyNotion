@@ -1,14 +1,17 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL
- 
+const BASE_URL = import.meta.env.VITE_BASE_URL + '/api/v1';
+
 // AUTH ENDPOINTS
 export const endpoints = {
   SENDOTP_API: BASE_URL + "/auth/sendotp",
   SIGNUP_API: BASE_URL + "/auth/signup",
   LOGIN_API: BASE_URL + "/auth/login",
+  REFRESHTOKEN_API: BASE_URL + "/auth/refresh",
+  LOGOUT_API: BASE_URL + "/auth/logout",
+
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
   GET_ADMIN_DATA_API: BASE_URL + "/auth/admin-data",
-} 
+}
 
 // PROFILE ENDPOINTS
 export const profileEndpoints = {
@@ -46,7 +49,7 @@ export const courseEndpoints = {
 
 // RATINGS AND REVIEWS
 export const ratingsEndpoints = {
-  REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",  
+  REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
 }
 
 // CATAGORIES API
@@ -55,7 +58,7 @@ export const categories = {
   CREATE_CATEGORY_API: BASE_URL + "/course/createCategory",
   DELETE_CATEGORY_API: BASE_URL + "/course/deleteCategory",
   UPDATE_CATEGORY_API: BASE_URL + "/course/updateCategory",
-  
+
 }
 
 // CATALOG PAGE DATA
