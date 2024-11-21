@@ -20,7 +20,8 @@ jobs:
       MAIL_HOST: ${{ secrets.MAIL_HOST }}
       MAIL_USER: ${{ secrets.MAIL_USER }}
       MAIL_PASS: ${{ secrets.MAIL_PASS }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+      REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET}}
       FOLDER_NAME: ${{ secrets.FOLDER_NAME }}
       CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
       API_KEY: ${{ secrets.API_KEY }}
